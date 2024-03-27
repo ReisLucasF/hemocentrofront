@@ -64,31 +64,43 @@ include './partials/header.php';
             };
 
             $.ajax({
-                type: 'POST',
-                url: 'https://hemocentro.vercel.app/usuarios/login',
-                data: JSON.stringify(formData),
-                contentType: 'application/json',
-                success: function (response) {
-                    if (response.error) {
-                        alert(response.error);
-                        return;
-                    }
+    url: './config/config.json',
+    type: 'GET',
+    dataType: 'json',
+    success: function(config) {
+        var apiUrl = config.linkapi + '/usuarios/login'; // Concatenando o link da API com a rota /usuarios/login
+          $.ajax({
+                  type: 'POST',
+                  url: apiUrl,
+                  data: JSON.stringify(formData),
+                  contentType: 'application/json',
+                  success: function(response) {
+                      if (response.error) {
+                          alert(response.error);
+                          return;
+                      }
 
-                    // Armazena os dados do usuário na sessão
-                    sessionStorage.setItem('usuarioLogado', JSON.stringify(response));
+                      // Armazena os dados do usuário na sessão
+                      sessionStorage.setItem('usuarioLogado', JSON.stringify(response));
 
-                    // Redireciona com base no tipo de usuário
-                    if (response.usuario.tipoUsuario === 'hemocentro') {
-                        window.location.href = 'agenda.php';
-                    } else if (response.usuario.tipoUsuario === 'doador') {
-                        window.location.href = 'criar_agendamento.php';
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Erro de autenticação:', xhr.responseText);
-                    alert('CPF, senha ou tipo de usuário incorretos. Por favor, tente novamente.');
-                }
-            });
+                      // Redireciona com base no tipo de usuário
+                      if (response.usuario.tipoUsuario === 'hemocentro') {
+                          window.location.href = 'agenda.php';
+                      } else if (response.usuario.tipoUsuario === 'doador') {
+                          window.location.href = 'criar_agendamento.php';
+                      }
+                  },
+                  error: function(xhr, status, error) {
+                      console.error('Erro de autenticação:', xhr.responseText);
+                      alert('CPF, senha ou tipo de usuário incorretos. Por favor, tente novamente.');
+                  }
+                });
+              },
+              error: function(xhr, status, error) {
+                  // Exibe mensagem de erro em caso de falha ao obter o arquivo JSON
+                  alert('Erro ao obter configuração: ' + error);
+              }
+          });
         });
     });
 </script>

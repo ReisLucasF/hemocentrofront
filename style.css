@@ -113,3 +113,10 @@ section-2 {
 .formAgendamento span {
     color: #000000 !important;
 }
+
+@media screen and (max-width: 390px) {
+    .card-blood {
+        width: 40px;
+    }
+}
+

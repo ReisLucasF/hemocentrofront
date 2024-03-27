@@ -73,9 +73,9 @@ try {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-4.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-      <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <script src='fullcalendar/dist/index.global.js'></script>
-
+    <script src="./fullcalendar/packages/core/locales/pt-br.global.js"></script>
   </head>
 
 

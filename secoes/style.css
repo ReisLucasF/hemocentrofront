@@ -190,3 +190,10 @@ form label, form input, form textarea {
     background-color: #0056b3;
 }
 
+@media screen and (max-width: 390px) {
+    .card-blood {
+        width: 40px;
+        display: block;
+        margin: 0 auto;
+    }
+}

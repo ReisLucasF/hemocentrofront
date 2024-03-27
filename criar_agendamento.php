@@ -82,144 +82,25 @@
             <option value="17:00">17:00</option>
             <option value="18:00">18:00</option>
         </select>
-        <button type="submit" class="btn btn-primary">Salvar Agendamento</button>
+        <button type="submit" class="btn btn-primary mt-4">Salvar Agendamento</button>
     </form>
 </div>
 
-<script>
-$(document).ready(function() {
-    $('#dataAgendamento').datepicker({
-        format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayHighlight: true,
-        startDate: new Date(),
-        daysOfWeekDisabled: '0,6'
-    }).on('changeDate', function(e) {
-        // A data está no formato dd/mm/yyyy, precisa ser convertida para yyyy-mm-dd
-        const dataFormatada = e.format('yyyy-mm-dd');
-        console.log(dataFormatada); // Deve mostrar a data no console
-        habilitarHorarios(dataFormatada);
-        atualizarHorariosDisponiveis(dataFormatada);
-    });
-
-    function habilitarHorarios(data) {
-        const horaAgendamento = $('#horaAgendamento');
-        horaAgendamento.prop('disabled', !data);
-        if (!data) {
-            horaAgendamento.val('');
-        }
-    }
-
-    function atualizarHorariosDisponiveis(dataSelecionada) {
-        // Assegure-se de que dataSelecionada está no formato correto esperado pela API
-        fetch(`https://hemocentro.vercel.app/disponibilidade/${dataSelecionada}`)
-            .then(response => response.json())
-            .then(data => {
-                const selectHoras = $('#horaAgendamento');
-                selectHoras.empty();
-                if (data.horariosDisponiveis && data.horariosDisponiveis.length) {
-                    data.horariosDisponiveis.forEach(horario => {
-                        selectHoras.append(new Option(horario, horario));
-                    });
-                } else {
-                    selectHoras.append(new Option('Não há horários disponíveis', ''));
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-    }
-
-    // Defina a data atual como valor padrão e atualize os horários disponíveis
-    const dataAtual = new Date().toISOString().split('T')[0];
-    $('#dataAgendamento').datepicker('update', dataAtual);
-    atualizarHorariosDisponiveis(dataAtual);
-});
-
-</script>
-
-
-
-<script>
-
-    function habilitarHorarios() {
-        const dataAgendamento = document.getElementById('dataAgendamento').value;
-        const horaAgendamento = document.getElementById('horaAgendamento');
-        
-        if (dataAgendamento) {
-            horaAgendamento.disabled = false;
-        } else {
-            horaAgendamento.disabled = true;
-            horaAgendamento.value = ''; 
-        }
-    }
-    
-    function atualizarHorariosDisponiveis(dataSelecionada) {
-        fetch(`https://hemocentro.vercel.app/disponibilidade/${dataSelecionada}`)
-        .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao obter os horários disponíveis');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const selectHoras = document.getElementById('horaAgendamento');
-                selectHoras.innerHTML = '';
-                
-                data.horariosDisponiveis.forEach(horario => {
-                    const option = document.createElement('option');
-                    option.value = horario;
-                    option.textContent = horario;
-                    selectHoras.appendChild(option);
-                });
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-        }
-        
-        document.getElementById('dataAgendamento').addEventListener('change', function() {
-            habilitarHorarios()
-            const dataSelecionada = this.value;
-            atualizarHorariosDisponiveis(dataSelecionada);
-        });
-        
-        window.onload = function() {
-            const dataAtual = new Date().toISOString().split('T')[0];
-            atualizarHorariosDisponiveis(dataAtual);
-        };
-    </script>
-
-
-<script>
-    var usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-
-    if (usuarioLogado && usuarioLogado.usuario) {
-        var usuario = usuarioLogado.usuario;
-
-        document.getElementById('nome').value = usuario.nome;
-        document.getElementById('email').value = usuario.email;
-        document.getElementById('cpf').value = usuario.cpf;
-        document.getElementById('dataNascimento').value = usuario.dataNascimento ? new Date(usuario.dataNascimento).toISOString().split('T')[0] : '';
-    }
-</script>
-
-
 <?php
-    include 'fetchAgendamento.php'
-    ?>
+    include './agendamento/fetchAgendamento.php'
+?>
 
 <?php
     include './rules/verificarDoador.php'
-    ?>
+?>
 
 <?php
-    include './regrasHorarios.php'
-    ?>
+    include './agendamento/regrasHorarios.php'
+?>
 
 <?php
     include './partials/footer.php';
-    ?>
+?>
 
 <!-- Adicione o link para o jQuery e o Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KXQo5qByhwpDS6Zk+AH9C7wE/R5K9aDjEGI1fL5VozM=" crossorigin="anonymous"></script>
