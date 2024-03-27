@@ -1,5 +1,8 @@
 <?php
-    include './config/config.php';
+// Definindo a variável $domain como global
+global $domain;
+$siteUrl = $_SERVER['HTTP_HOST'];
+$domain = "http://{$siteUrl}/hemocentro";
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark  transparent-navbar">
@@ -26,24 +29,48 @@
             if (usuarioLogado) {
                 var usuario = JSON.parse(usuarioLogado);
                 menuUsuario.empty();
-                menuUsuario.append('<li class="nav-item">' +
-                                        '<a class="nav-link" href="<?php echo $domain; ?>/agenda.php">Agenda</a>' +
-                                    '</li>' +
-                                    '<li class="nav-item">' +
-                                        '<a class="nav-link" href="<?php echo $domain; ?>/criar_agendamento.php">Criar agendamento</a>' +
-                                    '</li>'+
-                                    '<li class="nav-item dropdown">' +
-                                        '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-                                            usuario.usuario.nome +
-                                        '</a>' +
-                                        '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">' +
-                                            '<a class="dropdown-item" href="#">Perfil</a>' +
-                                            '<div class="dropdown-divider"></div>' +
-                                            '<a class="dropdown-item logout-btn" href="#">Logout</a>' +
-                                        '</div>' +
-                                    '</li>'
-                                    );
+
+                if (usuario.usuario.tipoUsuario === 'hemocentro') {
+                    // Renderizar menu para hemocentro
+                    menuUsuario.append('<li class="nav-item">' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/hemocentro/agenda.php">Agenda</a>' +
+                                        '</li>' +
+                                        '<li class="nav-item">' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/criar_agendamento.php">Criar agendamento</a>' +
+                                        '</li>'+
+                                        '<li class="nav-item dropdown">' +
+                                            '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                                usuario.usuario.nome +
+                                            '</a>' +
+                                            '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">' +
+                                                '<a class="dropdown-item" href="#">Perfil</a>' +
+                                                '<div class="dropdown-divider"></div>' +
+                                                '<a class="dropdown-item logout-btn" href="#">Logout</a>' +
+                                            '</div>' +
+                                        '</li>'
+                                        );
+                } else {
+                    // Renderizar menu para doador
+                    menuUsuario.append('<li class="nav-item">' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/doador/agenda.php">Agenda</a>' +
+                                        '</li>' +
+                                        '<li class="nav-item">' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/doador/criar_agendamento.php">Criar agendamento</a>' +
+                                        '</li>'+
+                                        '<li class="nav-item dropdown">' +
+                                            '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                                usuario.usuario.nome +
+                                            '</a>' +
+                                            '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">' +
+                                                '<a class="dropdown-item" href="#">Perfil</a>' +
+                                                '<div class="dropdown-divider"></div>' +
+                                                '<a class="dropdown-item logout-btn" href="#">Logout</a>' +
+                                            '</div>' +
+                                        '</li>'
+                                        );
+                }
             } else {
+                // Renderizar menu para usuários deslogados
                 menuUsuario.empty();
                 menuUsuario.append('<li class="nav-item">' +
                                         '<a class="nav-link" href="<?php echo $domain; ?>/agenda.php">Agenda</a>' +

@@ -1,5 +1,5 @@
 <?php
-include './partials/header.php';
+include '../partials/header.php';
 
 function obterDadosDaAPI($url) {
     $ch = curl_init($url);
@@ -44,7 +44,7 @@ function transformarEventos($dadosApi) {
 }
 
 try {
-    $config_file = './config/config.json';
+    $config_file = '../config/config.json';
     $config_content = file_get_contents($config_file);
     $config = json_decode($config_content, true);
 
@@ -73,15 +73,15 @@ try {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-4.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src='fullcalendar/dist/index.global.js'></script>
-    <script src="./fullcalendar/packages/core/locales/pt-br.global.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <script src='../fullcalendar/dist/index.global.js'></script>
+    <script src="../fullcalendar/packages/core/locales/pt-br.global.js"></script>
   </head>
 
 
 
   <?php
-    include './models/style.php'
+    include '../models/style.php'
   ?>
 
   <body>
@@ -119,28 +119,22 @@ try {
             $('#dataInicio').val(info.dateStr);
           },
           eventClick: function(arg) {
-            // Preencher campos com valores do evento
             $('#edit_nome').val(arg.event.extendedProps.nome);
             $('#edit_email').val(arg.event.extendedProps.email);
-            // Continue preenchendo outros campos conforme necessário
 
-            // Data de início (start)
             var start = new Date(arg.event.start.getTime() - (3 * 60 * 60 * 1000)); // Ajusta o fuso horário, se necessário
             var startISO = start.toISOString().slice(0, -8);
             $('#edit_dataInicio').val(startISO);
 
-            // Data de fim (end) - Tratamento para quando a dataFim é nula
             if (arg.event.end) {
               console.log(arg.event);
               var end = new Date(arg.event.end.getTime() - (3 * 60 * 60 * 1000)); // Ajusta o fuso horário, se necessário
               var endISO = end.toISOString().slice(0, -8);
               $('#edit_dataFim').val(endISO);
             } else {
-              // Se não houver data de fim, pode optar por limpar o campo ou definir um valor padrão
               $('#edit_dataFim').val(''); // Limpa o campo dataFim
             }
 
-            // Exibir a modal de edição
             $('#editarAgendamentoModal').modal('show');
           },
 
@@ -154,48 +148,20 @@ try {
       });
     </script>
 
-    <!-- <script>
-      function verificarUsuarioLogado() {
-          var usuarioLogado = sessionStorage.getItem('usuarioLogado');
-          if (!usuarioLogado) {
-              window.location.href = 'login.php';
-              return;
-          }
-
-          if (usuarioLogado) {
-              var usuario = JSON.parse(usuarioLogado);
-              console.log(usuario)
-              if (usuario.usuario.tipoUsuario === 'hemocentro') {
-              }else{
-                  window.location.href = 'login.php';
-
-              }
-          }
-      }
-
-      window.onload = function() {
-          verificarUsuarioLogado();
-      };
-  </script> -->
-
-
-
-
-
     <!-- Modal de Criação de Agendamento -->
     <?php
-      include './models/editarAgendamento.php'
+      include '../models/editarAgendamento.php'
     ?>
 
     <?php
-      include './models/criacaoAgendamento.php'
+      include '../models/criacaoAgendamento.php'
     ?>
 
 
     <script src="index.js"></script>
 
     <?php
-        include './partials/footer.php';
+        include '../partials/footer.php';
     ?>
 
   </body>

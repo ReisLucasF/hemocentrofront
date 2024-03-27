@@ -1,0 +1,102 @@
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0%, 1fr));
+        gap: 10px;
+    }
+
+    .principal {
+        text-align: center;
+        margin: 0 14%;
+        padding: 25px;
+        border-radius: 25px;
+        filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .3));
+        background-color: #FFFFFFB9;
+    }
+
+    .grid-item {
+        background-color: #FFFFFF;
+        padding: 60px 10px;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 5px;
+        transition: all 0.4s;
+        text-decoration: none !important;
+        color: #000000;
+    }
+
+
+    .grid-item:hover {
+        cursor: pointer;
+        scale: 1.04;
+        filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .3));
+        border-radius: 6px;
+        text-decoration: none !important;
+        color: #000000;
+    }
+
+
+
+    @media (max-width: 1025px) {
+        .grid-container {
+            grid-template-columns: repeat(3, minmax(33%, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        .grid-container {
+            grid-template-columns: repeat(4, minmax(33%, 1fr));
+        }
+    }
+
+    @media (max-width: 360px) {
+        .grid-container {
+            grid-template-columns: repeat(2, minmax(33%, 1fr));
+        }
+    }
+
+    @media (max-width: 600px) {
+        .grid-container {
+            grid-template-columns: repeat(2, minmax(1fr));
+        }
+
+        .principal {
+            width: 95%;
+            text-align: center;
+            padding: 20px;
+            border-radius: 25px;
+            filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .3));
+            background-color: #FFFFFFB9;
+            margin: 0 2.5%;
+        }
+
+
+    }
+
+
+
+
+    .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 600,
+            'GRAD' 0,
+            'opsz' 48
+    }
+
+    .material-symbols-outlined {
+        margin: 12px 0 20px;
+        color: #C00812;
+        scale: 2.5;
+    }
+
+    body {
+        background-color: black;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    .btn{
+        width: 100%;
+    }

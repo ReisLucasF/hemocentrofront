@@ -1,7 +1,6 @@
 
 <?php
     include './partials/header.php';
-    include './config/config.php';
 ?>
 
 <!DOCTYPE html>

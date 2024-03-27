@@ -6,7 +6,8 @@ $(document).ready(function() {
         autoclose: true,
         todayHighlight: true,
         startDate: new Date(),
-        daysOfWeekDisabled: '0,6'
+        daysOfWeekDisabled: '0,6',
+        language: 'pt-BR'
     }).on('changeDate', function(e) {
         // A data está no formato dd/mm/yyyy, precisa ser convertida para yyyy-mm-dd
         const dataFormatada = e.format('yyyy-mm-dd');
