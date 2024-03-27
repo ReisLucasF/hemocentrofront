@@ -1,0 +1,192 @@
+
+.container{
+    width: 100vw;
+    margin: 20px 5px;
+}
+
+.row{
+    width: 99vw;
+    height: 100%;
+}
+table{
+}
+
+a{
+    text-decoration: none;
+}
+
+#bannerForm, #coresForm {
+}
+
+/* Estilo para ajustar os formulários e tabelas dentro de bg-light col-md-9 */
+.bg-light.col-md-9 {
+    padding: 15px; /* Adicione algum espaçamento interno */
+}
+
+/* Estilo para ajustar a largura dos campos de entrada de texto */
+form input[type="text"], textarea, form input[type="file"], form input[type="submit"], form button {
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 15px;
+    padding: 10px; /* Adicione algum preenchimento para dar espaço para a sombra interna */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); 
+}
+
+/* Estilo para ajustar a largura dos botões */
+form input[type="submit"], form button {
+    width: 100%;
+}
+.rad{
+    border-radius: 6px;
+}
+
+
+/* Estilo para ajustar a tabela */
+.table {
+    width: 100%;
+}
+
+/* Estilo para ajustar o espaçamento entre as células da tabela */
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+/* Estilo para os botões da tabela */
+.table a.btn {
+    margin-right: 5px;
+}
+
+/* Estilo para a barra de rolagem horizontal da tabela, se necessário */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+#texto {
+width: 100%; /* Define a largura como 100% */
+height: 200px; /* Altura automática para ajustar o conteúdo */
+
+resize: vertical;
+}
+
+/* Adiciona um pouco de espaçamento para melhorar a aparência */
+form label, form input, form textarea {
+    margin-bottom: 10px;
+}
+
+.nav{
+    background-color: #0f0f0f;
+    padding: 0;
+    height: 100%;
+    box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5);
+}
+
+.forms{
+    background-color: #bebebe;
+    padding: 50px 10%;
+}
+
+.bg-light{
+    border-radius: 7px;
+    
+}
+
+.btn-site{
+    background-color: #0069D9;
+    border-radius: 7px;
+    color: #ffffff;
+    padding: 5px;
+}
+
+.btn-site:hover{
+    color: #ffffff;
+}
+
+
+.btn-superiores{
+    display: flex;
+    gap: 10px;
+}
+
+.btn-nav{
+    width: 100%;
+    background-color: #d6d6d6;
+    color: #000000;
+    text-align: center;
+    padding: 5px;
+    border-radius: 7px;
+    transition: all .6s;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.514); 
+}
+
+.btn-nav:hover{
+    color: #ffffff;
+    background-color: #527dac;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.356); 
+}
+
+.btn-nav.selected {
+    color: #ffffff;
+    background-color: #0069D9;
+
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.356); 
+}
+
+#nav{
+    border-radius: 7px;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+}
+
+
+
+#coresForm, #cardsForm, #contatoForm, #depoimentos, #bannerForm, #dadosSiteForm{
+    background-color: #ffffff;
+    padding: 2% 2%;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* picker de cores */
+#coresForm {
+    background-color: #ffffff;
+    padding: 2% 2%;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: auto;
+    box-sizing: border-box;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+#coresForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#coresForm input[type="color"] {
+    width: 100%;
+    height: 50px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#coresForm input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#coresForm input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+

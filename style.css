@@ -1,0 +1,115 @@
+h2,
+h4, p{
+    color: #ffffff;
+}
+
+html,
+body {
+    background: linear-gradient(135deg, #7e0b2b, #dd4a48, #121212);
+    background-size: 220% 220%;
+    animation: gradient 15s ease infinite;
+    /* min-height: 100vh; */
+    overflow-x: hidden;
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.login{
+    color: #000000 !important;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+ container-estoque {
+     display: flex;
+     justify-content: space-between;
+     background: white;
+     border-radius: 10px;
+     padding: 20px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+
+ section-1 {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     grid-gap: 10px;
+     align-items: center;
+ }
+
+ .card {
+     position: relative;
+     display: -ms-flexbox;
+     display: flex;
+     -ms-flex-direction: column;
+     flex-direction: column;
+     min-width: 0;
+     word-wrap: break-word;
+     background: linear-gradient(329deg, #ffffffc9, #fafafa9a, #c2c2c283);
+     background-clip: border-box;
+     border: 1px solid rgba(0, 0, 0, .125);
+     border-radius: 1.5rem;
+ }
+
+ .card-blood {
+     width: 80px;
+     display: block;
+     margin: 0 auto;
+ }
+
+ .card-blood+h4 {
+     text-align: center;
+     margin-top: 5px;
+ }
+
+section-2 {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ .card-blood-leg {
+    width: 50px;
+     display: block;
+     margin-bottom: 10px;
+ }
+
+ section-2 h2 {
+    font-size: 25px;
+     margin-bottom: 15px;
+ }
+
+ section-2 h4 {
+    font-size: 15px;
+     margin-bottom: 5px;
+ }
+
+ container-estoque h4{
+    color: #121212;
+ }
+
+.col>h4,
+.col>h2,
+.col>p {
+    text-align: center;
+}
+
+.agenda{
+    width: 300px;
+}
+
+/* form agendamento */
+.formAgendamento {
+    color: #000000 !important;
+    background: linear-gradient(166deg, #ffffffe3, #fafafae8, #c2c2c2d7);
+    border-radius: 15px;
+    margin-bottom: 10rem;
+    padding: 15px;
+}
+
+.formAgendamento>h2,
+.formAgendamento span {
+    color: #000000 !important;
+}
