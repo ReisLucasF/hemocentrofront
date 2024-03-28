@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../grid.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KXQo5qByhwpDS6Zk+AH9C7wE/R5K9aDjEGI1fL5VozM=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
+  <?php echo $favicon; ?>
 </head>
 
 

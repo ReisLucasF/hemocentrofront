@@ -11,6 +11,7 @@
   <title>Layout de Grid com Bootstrap</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+  <?php echo $favicon; ?>
 </head>
 <style>
   .blood01{
@@ -37,14 +38,14 @@
         <!-- Grid dos Estoques -->
         <container-estoque>
             <section-1>
-                <div><img class="card-blood" id="blood-Apos" alt="A+"><h4>A+</h4></div>
-                <div><img class="card-blood" id="blood-Aneg" alt="A-"><h4>A-</h4></div>
-                <div><img class="card-blood" id="blood-Bpos" alt="B+"><h4>B+</h4></div>
-                <div><img class="card-blood" id="blood-Bneg" alt="B-"><h4>B-</h4></div>
-                <div><img class="card-blood" id="blood-ABpos" alt="AB+"><h4>AB+</h4></div>
-                <div><img class="card-blood" id="blood-ABneg" alt="AB-"><h4>AB-</h4></div>
-                <div><img class="card-blood" id="blood-Opos" alt="o+"><h4>o+</h4></div>
-                <div><img class="card-blood" id="blood-Oneg" alt="o-"><h4>o-</h4></div>
+                <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-Apos" alt="A+"><h4>A+</h4></div>
+                <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-Aneg" alt="A-"><h4>A-</h4></div>
+                <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-Bpos" alt="B+"><h4>B+</h4></div>
+                <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-Bneg" alt="B-"><h4>B-</h4></div>
+                <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-ABpos" alt="AB+"><h4>AB+</h4></div>
+                <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-ABneg" alt="AB-"><h4>AB-</h4></div>
+                <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-Opos" alt="o+"><h4>o+</h4></div>
+                <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-Oneg" alt="o-"><h4>o-</h4></div>
             </section-1>
             <!-- Colunas de legenda -->
             <section-2>

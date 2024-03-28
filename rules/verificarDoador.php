@@ -2,7 +2,7 @@
     function verificarUsuarioLogado() {
         var usuarioLogado = sessionStorage.getItem('usuarioLogado');
         if (!usuarioLogado) {
-            window.location.href = 'login.php';
+            window.location.href = '<?php echo $domain; ?>/login.php';
             return;
         }
 
@@ -11,8 +11,7 @@
             console.log(usuario)
             if (usuario.usuario.tipoUsuario === 'doador') {
             }else{
-                window.location.href = 'login.php';
-
+                window.location.href = '<?php echo $domain; ?>/login.php';
             }
         }
     }

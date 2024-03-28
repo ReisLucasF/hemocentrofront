@@ -1,18 +1,7 @@
-function exibirGifCarregamento() {
-    var gifAltText = 'carregando...';
-    var imagens = document.querySelectorAll('.card-blood-leg');
-    imagens.forEach(function(imagem) {
-        imagem.src = './img/carregamento.gif';
-        imagem.alt = gifAltText;
-    });
-}
 
 function obterBancoDeSangue() {
     fetch('./config/config.json')
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao obter a configuração');
-            }
             return response.json();
         })
         .then(config => {
@@ -20,18 +9,12 @@ function obterBancoDeSangue() {
             return fetch(apiUrl);
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao obter os dados do banco de sangue');
-            }
             return response.json();
         })
         .then(data => {
             bancoDeSangue = data[0];
             atualizarImagensEstoque();
         })
-        .catch(error => {
-            console.error('Erro:', error);
-        });
 }
 
 

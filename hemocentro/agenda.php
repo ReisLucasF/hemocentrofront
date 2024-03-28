@@ -76,6 +76,7 @@ try {
     <link rel="stylesheet" href="../style.css">
     <script src='../fullcalendar/dist/index.global.js'></script>
     <script src="../fullcalendar/packages/core/locales/pt-br.global.js"></script>
+    <?php echo $favicon; ?>
   </head>
 
 
