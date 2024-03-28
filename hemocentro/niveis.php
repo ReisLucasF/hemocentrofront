@@ -100,60 +100,129 @@
     </div>
 </div>
 
+<header class="row align-items-center">
+    <div class="col-auto">
+        <button class="btn btn-secondary seta-anterior" id="botao-anterior">&lt;</button>
+    </div>
+    <div class="col">
+        <h2 class="text-center" id="nome-hemocentro">Nome do Hemocentro</h2>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-secondary seta-proxima" id="botao-proximo">&gt;</button>
+    </div>
+</header>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KXQo5qByhwpDS6Zk+AH9C7wE/R5K9aDjEGI1fL5VozM=" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function() {
-    $.get("https://hemocentro-pi.vercel.app/banco", function(data) {
-        var estoque = data[0];
-        
-        $("#valorIdeal").val(estoque.valorIdeal);
-        $("#valorMin").val(estoque.valorMin);
-        $("#valorMax").val(estoque.valorMax);
-        $("#tipoA\\+").val(estoque.tiposSanguineos["A+"]);
-        $("#tipoA\\-").val(estoque.tiposSanguineos["A-"]);
-        $("#tipoB\\+").val(estoque.tiposSanguineos["B+"]);
-        $("#tipoB\\-").val(estoque.tiposSanguineos["B-"]);
-        $("#tipoAB\\+").val(estoque.tiposSanguineos["AB+"]);
-        $("#tipoAB\\-").val(estoque.tiposSanguineos["AB-"]);
-        $("#tipoO\\+").val(estoque.tiposSanguineos["O+"]);
-        $("#tipoO\\-").val(estoque.tiposSanguineos["O-"]);
-    });
+    <script>
+        $(document).ready(function() {
+            let hemocentros = [];
+            let hemocentro;
+            let bancoDeSangue;
+            let idHemocentro;
 
-    $("#editarEstoqueForm").submit(function(event) {
-        event.preventDefault();
-        var formData = {
-            valorIdeal: $("#valorIdeal").val(),
-            valorMin: $("#valorMin").val(),
-            valorMax: $("#valorMax").val(),
-            tiposSanguineos: {
-                "A+": $("#tipoA\\+").val(),
-                "A-": $("#tipoA\\-").val(),
-                "B+": $("#tipoB\\+").val(),
-                "B-": $("#tipoB\\-").val(),
-                "AB+": $("#tipoAB\\+").val(),
-                "AB-": $("#tipoAB\\-").val(),
-                "O+": $("#tipoO\\+").val(),
-                "O-": $("#tipoO\\-").val(),
+            function obterHemocentros() {
+                return fetch('https://hemocentro-pi.vercel.app/hemocentro')
+                    .then(response => response.json())
+                    .then(data => {
+                        hemocentros = data;
+                        const hemocentroPadrao = hemocentros[0];
+                        return obterBancoDeSangue(hemocentroPadrao.id);
+                    })
+                    .catch(error => console.error('Erro ao obter hemocentros:', error));
             }
-        };
 
-        $.ajax({
-            url: "https://hemocentro-pi.vercel.app/banco/1",
-            type: "PUT",
-            contentType: "application/json",
-            data: JSON.stringify(formData),
-            success: function(response) {
-                alert("Estoque atualizado com sucesso!");
-            },
-            error: function(xhr, status, error) {
-                console.error("Erro ao atualizar o estoque:", error);
-                alert("Erro ao atualizar o estoque. Verifique o console para mais detalhes.");
+            function obterBancoDeSangue(hemocentroId) {
+                return fetch(`https://hemocentro-pi.vercel.app/banco/${hemocentroId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        bancoDeSangue = data;
+                        return fetch(`https://hemocentro-pi.vercel.app/hemocentro/${bancoDeSangue.hemocentro_id}`);
+                    })
+                    .then(response => response.json())
+                    .then(hemocentro => {
+                        bancoDeSangue.hemocentro = hemocentro;
+                        document.getElementById('nome-hemocentro').textContent = hemocentro[0].nome;
+
+                        console.log('mensagem', bancoDeSangue)
+
+                        // Preencher os campos de entrada com os dados do banco de sangue
+                        document.getElementById('valorIdeal').value = bancoDeSangue.valorIdeal || '';
+                        document.getElementById('valorMin').value = bancoDeSangue.valorMin || '';
+                        document.getElementById('valorMax').value = bancoDeSangue.valorMax || '';
+                        document.getElementById('tipoA+').value = bancoDeSangue.tiposSanguineos['A+'] || '';
+                        document.getElementById('tipoA-').value = bancoDeSangue.tiposSanguineos['A-'] || '';
+                        document.getElementById('tipoB+').value = bancoDeSangue.tiposSanguineos['B+'] || '';
+                        document.getElementById('tipoB-').value = bancoDeSangue.tiposSanguineos['B-'] || '';
+                        document.getElementById('tipoAB+').value = bancoDeSangue.tiposSanguineos['AB+'] || '';
+                        document.getElementById('tipoAB-').value = bancoDeSangue.tiposSanguineos['AB-'] || '';
+                        document.getElementById('tipoO+').value = bancoDeSangue.tiposSanguineos['O+'] || '';
+                        document.getElementById('tipoO-').value = bancoDeSangue.tiposSanguineos['O-'] || '';
+                    })
+                    .catch(error => console.error('Erro ao obter banco de sangue:', error));
             }
+
+            $('#editarEstoqueForm').on('submit', function(event) {
+                event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+                atualizarEstoque(); // Chama a função para atualizar o estoque
+            });
+
+
+            // Função para atualizar o estoque
+            function atualizarEstoque() {
+                // Criar um objeto para armazenar os dados do formulário
+                const formData = {
+                    valorIdeal: $('#valorIdeal').val(),
+                    valorMin: $('#valorMin').val(),
+                    valorMax: $('#valorMax').val(),
+                    tiposSanguineos: {
+                        'A+': $('#tipoA\\+').val(),
+                        'A-': $('#tipoA-').val(),
+                        'B+': $('#tipoB\\+').val(),
+                        'B-': $('#tipoB-').val(),
+                        'AB+': $('#tipoAB\\+').val(),
+                        'AB-': $('#tipoAB-').val(),
+                        'O+': $('#tipoO\\+').val(),
+                        'O-': $('#tipoO-').val()
+                    }
+                };
+
+                console.log('Dados do formulário:', formData); // Verifica se os dados do formulário estão corretos
+
+                // Realizar a requisição AJAX para atualizar o estoque
+                $.ajax({
+                    url: `http://localhost:3000/banco/${bancoDeSangue.hemocentro_id}`,
+                    type: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        alert("Estoque atualizado com sucesso!");
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Erro ao atualizar o estoque:", error);
+                        alert("Erro ao atualizar o estoque. Verifique o console para mais detalhes.");
+                    }
+                });
+            }
+
+            // Adiciona eventos de clique para os botões
+            $('#botao-anterior').on('click', function() {
+                const indexAtual = hemocentros.findIndex(hemocentro => hemocentro.id === bancoDeSangue.hemocentro_id);
+                const novoIndex = (indexAtual === 0) ? hemocentros.length - 1 : indexAtual - 1;
+                const novoHemocentro = hemocentros[novoIndex];
+                obterBancoDeSangue(novoHemocentro.id);
+            });
+
+            $('#botao-proximo').on('click', function() {
+                const indexAtual = hemocentros.findIndex(hemocentro => hemocentro.id === bancoDeSangue.hemocentro_id);
+                const novoIndex = (indexAtual === hemocentros.length - 1) ? 0 : indexAtual + 1;
+                const novoHemocentro = hemocentros[novoIndex];
+                obterBancoDeSangue(novoHemocentro.id);
+            });
+
+            obterHemocentros();
         });
-    });
-});
-</script>
+    </script>
 
 </body>
 </html>

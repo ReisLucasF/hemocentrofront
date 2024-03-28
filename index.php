@@ -36,7 +36,20 @@
         <h2>Indicadores</h2>
         <p>Nossos indicadores sanguíneos.</p>
         <!-- Grid dos Estoques -->
+        <header class="row align-items-center">
+            <div class="col-auto">
+                <button class="btn btn-secondary seta-anterior" id="botao-anterior">&lt;</button>
+            </div>
+            <div class="col">
+                <h2 class="text-center" id="nome-hemocentro">Nome do Hemocentro</h2>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-secondary seta-proxima" id="botao-proximo">&gt;</button>
+            </div>
+        </header>
+
         <container-estoque>
+            
             <section-1>
                 <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-Apos" alt="A+"><h4>A+</h4></div>
                 <div><img src="https://hemocentro.devosalliance.com/img/carregamento.gif" class="card-blood" id="blood-Aneg" alt="A-"><h4>A-</h4></div>
@@ -59,6 +72,8 @@
             </section-2>
         </container-estoque>
       </div>
+
+
       
       <div class="col  text-center">
         <h2>Agende sua Doação</h2>

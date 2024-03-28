@@ -37,11 +37,11 @@ include './partials/header.php';
               </div>
               <div class="form-group">
                 <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" name="cpf" class="form-control" required>
+                <input type="number" id="cpf" name="cpf" class="form-control" oninput="limitarComprimento(this, 11)" placeholder="Digite seu cpf" required>
               </div>
               <div class="form-group">
                 <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha" class="form-control" required>
+                <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua senha" required>
               </div>
               <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             </form>
@@ -50,6 +50,14 @@ include './partials/header.php';
       </div>
     </div>
   </div>
+
+<script>
+  function limitarComprimento(input, maxLength) {
+      if (input.value.length > maxLength) {
+          input.value = input.value.slice(0, maxLength);
+      }
+  }
+</script>
 
 
  <script>
