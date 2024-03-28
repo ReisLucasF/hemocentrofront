@@ -66,23 +66,57 @@ $(document).ready(function() {
 </script>
 
 <script>
-    var municipios = [
-        "João Pessoa",
-        "Campina Grande",
-    ];
-
     function preencherMunicipios() {
-        var selectMunicipio = document.getElementById("municipio");
+        fetch('https://hemocentro-pi.vercel.app/hemocentro/cidades')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter lista de municípios');
+                }
+                return response.json();
+            })
+            .then(data => {
+                var selectMunicipio = document.getElementById("municipio");
+                selectMunicipio.innerHTML = '<option value="">Selecione um município</option>';
 
-        selectMunicipio.innerHTML = '<option value="">Selecione um município</option>';
-
-        municipios.forEach(function(municipio) {
-            var option = document.createElement("option");
-            option.text = municipio;
-            option.value = municipio;
-            selectMunicipio.add(option);
-        });
+                data.forEach(function(municipio) {
+                    var option = document.createElement("option");
+                    option.text = municipio;
+                    option.value = municipio;
+                    selectMunicipio.add(option);
+                });
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
     }
 
     preencherMunicipios();
+
+    function preencherHemocentros() {
+        var municipioSelecionado = document.getElementById("municipio").value;
+
+        fetch(`https://hemocentro-pi.vercel.app/hemocentro/${municipioSelecionado}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao obter lista de hemocentros');
+                }
+                return response.json();
+            })
+            .then(data => {
+                var selectHemocentro = document.getElementById("hemocentro");
+                selectHemocentro.innerHTML = '<option value="">Selecione o hemocentro</option>';
+
+                data.forEach(function(hemocentro) {
+                    var option = document.createElement("option");
+                    option.text = hemocentro.nome;
+                    option.value = hemocentro.id; // Se o ID for usado como valor
+                    selectHemocentro.add(option);
+                });
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    }
+
+    document.getElementById("municipio").addEventListener("change", preencherHemocentros);
 </script>

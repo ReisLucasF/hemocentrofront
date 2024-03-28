@@ -52,13 +52,16 @@
         </a>
 
         <!-- 6 -->
-        <a  class="grid-item" href="<?php echo $domain; ?>/hemocentro/admin.php">
+        <a  class="grid-item" href="<?php echo $domain; ?>/hemocentro/admin/">
           <span class="material-symbols-outlined"> admin_panel_settings </span><br />
           Administrar
         </a>
     </div>
   </div>
-  
+
+<?php
+  include '../rules/verificarHemocentro.php';
+?>
   
 <?php
     include '../partials/footer.php';

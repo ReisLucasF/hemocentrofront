@@ -1,5 +1,4 @@
 <?php
-// Definindo a variável $domain como global
 global $domain;
 $siteUrl = $_SERVER['HTTP_HOST'];
 $domain = "http://{$siteUrl}/hemocentro";
@@ -14,7 +13,6 @@ $domain = "http://{$siteUrl}/hemocentro";
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto" id="menuUsuario">
-            <!-- Os itens de menu do usuário serão adicionados dinamicamente aqui -->
         </ul>
     </div>
 </nav>
@@ -31,13 +29,10 @@ $domain = "http://{$siteUrl}/hemocentro";
                 menuUsuario.empty();
 
                 if (usuario.usuario.tipoUsuario === 'hemocentro') {
-                    // Renderizar menu para hemocentro
+                    //hemocentro
                     menuUsuario.append('<li class="nav-item">' +
-                                            '<a class="nav-link" href="<?php echo $domain; ?>/hemocentro/agenda.php">Agenda</a>' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/hemocentro/index.php">Painel</a>' +
                                         '</li>' +
-                                        '<li class="nav-item">' +
-                                            '<a class="nav-link" href="<?php echo $domain; ?>/criar_agendamento.php">Criar agendamento</a>' +
-                                        '</li>'+
                                         '<li class="nav-item dropdown">' +
                                             '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                                                 usuario.usuario.nome +
@@ -50,11 +45,8 @@ $domain = "http://{$siteUrl}/hemocentro";
                                         '</li>'
                                         );
                 } else {
-                    // Renderizar menu para doador
+                    //doador
                     menuUsuario.append('<li class="nav-item">' +
-                                            '<a class="nav-link" href="<?php echo $domain; ?>/doador/agenda.php">Agenda</a>' +
-                                        '</li>' +
-                                        '<li class="nav-item">' +
                                             '<a class="nav-link" href="<?php echo $domain; ?>/doador/criar_agendamento.php">Criar agendamento</a>' +
                                         '</li>'+
                                         '<li class="nav-item dropdown">' +
@@ -70,13 +62,9 @@ $domain = "http://{$siteUrl}/hemocentro";
                                         );
                 }
             } else {
-                // Renderizar menu para usuários deslogados
                 menuUsuario.empty();
                 menuUsuario.append('<li class="nav-item">' +
-                                        '<a class="nav-link" href="<?php echo $domain; ?>/agenda.php">Agenda</a>' +
-                                    '</li>' +
-                                    '<li class="nav-item">' +
-                                        '<a class="nav-link" href="<?php echo $domain; ?>/criar_agendamento.php">Criar agendamento</a>' +
+                                        '<a class="nav-link" href="<?php echo $domain; ?>/sobre.php">Sobre</a>' +
                                     '</li>'+
                                     '<li class="nav-item">' +
                                         '<a class="nav-link login" href="<?php echo $domain; ?>/login.php">Login</a>' +
@@ -84,17 +72,13 @@ $domain = "http://{$siteUrl}/hemocentro";
                                     );
             }
 
-            // Adiciona um ouvinte de evento para o botão de logout
             $('.logout-btn').click(function(event) {
                 event.preventDefault();
-                // Limpa a sessão
                 sessionStorage.removeItem('usuarioLogado');
-                // Redireciona para a página de login
                 window.location.href = '<?php echo $domain; ?>/login.php';
             });
         }
 
-        // Chama a função ao carregar a página
         atualizarMenuUsuario();
     });
 </script>

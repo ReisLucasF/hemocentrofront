@@ -67,7 +67,7 @@ document.getElementById('criarAgendamentoForm').addEventListener('submit', funct
 
     console.log('JSON enviado para o backend:', json);
 
-    fetch('https://hemocentro.vercel.app/agendamentos', {
+    fetch('https://hemocentro-pi.vercel.app/agendamentos', {
         method: 'POST',
         body: json,
         headers: {

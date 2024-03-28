@@ -85,9 +85,9 @@ include './partials/header.php';
 
                       // Redireciona com base no tipo de usuário
                       if (response.usuario.tipoUsuario === 'hemocentro') {
-                          window.location.href = 'agenda.php';
+                          window.location.href = 'hemocentro/index.php';
                       } else if (response.usuario.tipoUsuario === 'doador') {
-                          window.location.href = 'criar_agendamento.php';
+                          window.location.href = 'index.php';
                       }
                   },
                   error: function(xhr, status, error) {

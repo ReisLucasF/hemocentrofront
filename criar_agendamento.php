@@ -32,6 +32,12 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="hemocentro">Hemocentro:</label>
+            <select id="hemocentro" name="hemocentro" class="form-control" required>
+                <option value="">Selecione o hemocentro</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" class="form-control" value="Nome do Usuário" readonly>
         </div>

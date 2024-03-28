@@ -148,6 +148,10 @@ try {
       });
     </script>
 
+    <?php
+      include '../rules/verificarHemocentro.php';
+    ?>
+
     <!-- Modal de Criação de Agendamento -->
     <?php
       include '../models/editarAgendamento.php'

@@ -1,0 +1,11 @@
+.box{
+    color: #000000;
+    background: linear-gradient(166deg, #ffffffe3, #fafafae8, #c2c2c2d7);
+    border-radius: 15px;
+    margin-bottom: 10rem;
+    padding: 15px;
+}
+
+h2{
+    color: #000000;
+}
