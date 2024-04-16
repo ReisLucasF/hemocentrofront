@@ -30,7 +30,9 @@
           </div>
           <div class="form-group">
             <label for="novaCidade">Cidade:</label>
-            <input type="text" class="form-control" id="novaCidade" name="cidade" required>
+            <select class="form-control" name="novaCidade" id="novaCidade" required>
+              <!-- Opções serão adicionadas aqui -->
+            </select>
           </div>
           <div class="form-group">
             <label for="novoContato">Contato:</label>
@@ -55,7 +57,6 @@ function adicionarCampanha() {
         contato: document.getElementById('novoContato').value
     };
 
-    // Use fetch para enviar os dados para a API
     fetch('https://hemocentro-pi.vercel.app/campanhas', {
         method: 'POST',
         headers: {
@@ -70,8 +71,8 @@ function adicionarCampanha() {
         return response.json();
     })
     .then(() => {
-        $('#modalAdicionarCampanha').modal('hide'); // Fecha a modal após o sucesso
-        carregarCampanhas(); // Recarrega as campanhas
+        $('#modalAdicionarCampanha').modal('hide');
+        carregarCampanhas(); 
     })
     .catch(error => {
         console.error('Erro:', error);

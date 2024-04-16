@@ -31,7 +31,9 @@
           </div>
           <div class="form-group">
             <label for="editCidade">Cidade:</label>
-            <input type="text" class="form-control" id="editCidade" required>
+            <select class="form-control" id="editCidade" name="cidade" required>
+              <!-- Opções serão adicionadas aqui -->
+            </select>
           </div>
           <div class="form-group">
             <label for="editContato">Contato:</label>

@@ -183,3 +183,47 @@ function excluirCampanha(id) {
     alert('Erro ao excluir campanha. Verifique o console para mais detalhes.');
   });
 }
+
+
+// Função para popular o select com as cidades retornadas da API
+function popularSelectCidades(selectId) {
+  const selectCidade = document.getElementById(selectId);
+
+  // Faz a requisição à API
+  fetch('https://hemocentro-pi.vercel.app/hemocentro/cidades')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao buscar as cidades');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Limpa as opções existentes
+      selectCidade.innerHTML = '';
+
+      // Adiciona uma opção padrão
+      const optionDefault = document.createElement('option');
+      optionDefault.value = '';
+      optionDefault.textContent = 'Selecione uma cidade';
+      selectCidade.appendChild(optionDefault);
+
+      // Adiciona as cidades retornadas como opções
+      data.forEach(cidade => {
+        const option = document.createElement('option');
+        option.value = cidade;
+        option.textContent = cidade;
+        selectCidade.appendChild(option);
+      });
+    })
+    .catch(error => {
+      console.error('Erro ao buscar as cidades:', error);
+      // Você pode adicionar uma mensagem de erro aqui se desejar
+    });
+}
+
+// Chama a função para popular os selects quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+  popularSelectCidades('editCidade');
+  popularSelectCidades('novaCidade');
+});
+
