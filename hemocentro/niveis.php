@@ -108,7 +108,7 @@
     <script>
         $(document).ready(function() {
             let usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-            let hemocentroId = usuarioLogado && usuarioLogado.usuario ? usuarioLogado.usuario.hemocentro_id : null;
+            let hemocentroId = usuarioLogado ? usuarioLogado.hemocentro_id : null;
 
             function obterBancoDeSangue() {
                 if (!hemocentroId) return;

@@ -30,7 +30,7 @@ $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='ima
                 var usuario = JSON.parse(usuarioLogado);
                 menuUsuario.empty();
 
-                if (usuario.usuario.tipoUsuario === 'hemocentro') {
+                if (usuario.tipoUsuario === 'hemocentro') {
                     //hemocentro
                     menuUsuario.append('<li class="nav-item">' +
                                             '<a class="nav-link" href="<?php echo $domain; ?>/hemocentro/index.php">Painel</a>' +
@@ -40,7 +40,7 @@ $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='ima
                                         '</li>' +
                                         '<li class="nav-item dropdown">' +
                                             '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-                                                usuario.usuario.nome +
+                                                usuario.nome +
                                             '</a>' +
                                             '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">' +
                                                 '<a class="dropdown-item" href="<?php echo $domain; ?>/hemocentro/perfil/">Perfil</a>' +
@@ -59,7 +59,7 @@ $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='ima
                                         '</li>' +
                                         '<li class="nav-item dropdown">' +
                                             '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-                                                usuario.usuario.nome +
+                                                usuario.nome +
                                             '</a>' +
                                             '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">' +
                                                 '<a class="dropdown-item" href="<?php echo $domain; ?>/doador/">Perfil</a>' +

@@ -77,8 +77,7 @@
 
     <script>
        function editarCampanha() {
-            const usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-            const sessionUser = usuarioLogado.usuario;
+            const sessionUser = JSON.parse(sessionStorage.getItem('usuarioLogado'));
             if (!sessionUser) {
                 console.error('Usuário não encontrado no session.');
                 alert('Erro ao carregar dados para edição.');

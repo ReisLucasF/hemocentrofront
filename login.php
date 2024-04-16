@@ -76,7 +76,7 @@ include './partials/header.php';
     type: 'GET',
     dataType: 'json',
     success: function(config) {
-        var apiUrl = config.linkapi + '/usuarios/login'; // Concatenando o link da API com a rota /usuarios/login
+        var apiUrl = config.linkapi + '/usuarios/login'; 
           $.ajax({
                   type: 'POST',
                   url: apiUrl,
@@ -87,11 +87,8 @@ include './partials/header.php';
                           alert(response.error);
                           return;
                       }
+                      sessionStorage.setItem('usuarioLogado', JSON.stringify(response.usuario)); 
 
-                      // Armazena os dados do usuário na sessão
-                      sessionStorage.setItem('usuarioLogado', JSON.stringify(response));
-
-                      // Redireciona com base no tipo de usuário
                       if (response.usuario.tipoUsuario === 'hemocentro') {
                           window.location.href = 'hemocentro/index.php';
                       } else if (response.usuario.tipoUsuario === 'doador') {
@@ -105,7 +102,6 @@ include './partials/header.php';
                 });
               },
               error: function(xhr, status, error) {
-                  // Exibe mensagem de erro em caso de falha ao obter o arquivo JSON
                   alert('Erro ao obter configuração: ' + error);
               }
           });

@@ -12,7 +12,7 @@
         <form id="formNovaCampanha">
           <div class="form-group">
             <label for="novaSolicitante">Solicitante:</label>
-            <input type="text" class="form-control" id="novaSolicitante" name="solicitante" required>
+            <input type="text" class="form-control" id="novaSolicitante" name="solicitante" required readonly>
           </div>
           <div class="form-group">
             <label for="novoTipoSanguineo">Tipo Sanguíneo:</label>
@@ -49,6 +49,15 @@
 </div>
 
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Carrega o nome do usuário logado do sessionStorage
+    const usuarioLogado = sessionStorage.getItem('usuarioLogado');
+    if (usuarioLogado) {
+        const nomeUsuario = JSON.parse(usuarioLogado).nome;
+        document.getElementById('novaSolicitante').value = nomeUsuario;
+    }
+});
+
 function adicionarCampanha() {
     const dadosCampanha = {
         solicitante: document.getElementById('novaSolicitante').value,

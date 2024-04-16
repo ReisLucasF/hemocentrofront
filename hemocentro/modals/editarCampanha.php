@@ -13,7 +13,7 @@
           <input type="hidden" id="editId">
           <div class="form-group">
             <label for="editSolicitante">Solicitante:</label>
-            <input type="text" class="form-control" id="editSolicitante" required>
+            <input type="text" class="form-control" id="editSolicitante" required readonly>
           </div>
           <div class="form-group">
             <label for="editTipoSanguineo">Tipo Sanguíneo:</label>
@@ -60,7 +60,7 @@ function salvarEdicao() {
   };
 
   fetch(`https://hemocentro-pi.vercel.app/campanhas/${id}`, {
-    method: 'PUT',  // Supondo que a API aceite o método PUT para atualizações
+    method: 'PUT', 
     headers: {
       'Content-Type': 'application/json'
     },

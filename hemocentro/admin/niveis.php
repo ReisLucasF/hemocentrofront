@@ -1,6 +1,8 @@
 
 <?php
     include '../../partials/header.php';
+
+    include '../../auth.php'
 ?>
 
 <!DOCTYPE html>

@@ -130,10 +130,10 @@ function carregarCampanhas() {
 }
 
 function editarCampanha(id) {
-  fetch(`https://hemocentro-pi.vercel.app/usuarios/${id}`)
+  fetch(`https://hemocentro-pi.vercel.app/campanhas/${id}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+      console.log(data)
       document.getElementById('editId').value = data.id;
       document.getElementById('editSolicitante').value = data.solicitante;
       document.getElementById('editTipoSanguineo').value = data.tiposan;
