@@ -38,6 +38,11 @@
           <span class="material-symbols-outlined"> support_agent </span><br />
           Abrir chamado
         </a>
+
+        <a class="grid-item" href="<?php echo $domain; ?>/hemocentro/admin/niveis.php">
+          <span class="material-symbols-outlined"> bloodtype </span><br />
+          Níveis de sangue
+        </a>
     </div>
   </div>
 

@@ -1,6 +1,6 @@
 
 <?php
-    include '../partials/header.php';
+    include '../../partials/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,14 +10,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editar Estoque</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="stylesheet" href="./grid.css">
+  <link rel="stylesheet" href="../grid.css">
   <?php echo $favicon; ?>
 </head>
 <body>
 
 <div class="container">
+    <header class="row align-items-center">
+        <div class="col-auto">
+            <button class="btn btn-secondary seta-anterior" id="botao-anterior">&lt;</button>
+        </div>
+        <div class="col">
+            <h2 class="text-center" id="nome-hemocentro">Nome do Hemocentro</h2>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-secondary seta-proxima" id="botao-proximo">&gt;</button>
+        </div>
+    </header>
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -100,37 +112,62 @@
     </div>
 </div>
 
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KXQo5qByhwpDS6Zk+AH9C7wE/R5K9aDjEGI1fL5VozM=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-            let usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-            let hemocentroId = usuarioLogado && usuarioLogado.usuario ? usuarioLogado.usuario.hemocentro_id : null;
+            let hemocentros = [];
+            let hemocentro;
+            let bancoDeSangue;
+            let idHemocentro;
 
-            function obterBancoDeSangue() {
-                if (!hemocentroId) return;
-                fetch(`https://hemocentro-pi.vercel.app/banco/${hemocentroId}`)
+            function obterHemocentros() {
+                return fetch('https://hemocentro-pi.vercel.app/hemocentro')
                     .then(response => response.json())
                     .then(data => {
-                        $('#valorIdeal').val(data.valorIdeal || '');
-                        $('#valorMin').val(data.valorMin || '');
-                        $('#valorMax').val(data.valorMax || '');
-                        $('#tipoA\\+').val(data.tiposSanguineos['A+'] || 0); // Use '\\+' para escapar o caractere '+' no seletor
-                        $('#tipoA-').val(data.tiposSanguineos['A-'] || 0);
-                        $('#tipoB\\+').val(data.tiposSanguineos['B+'] || 0);
-                        $('#tipoB-').val(data.tiposSanguineos['B-'] || 0);
-                        $('#tipoAB\\+').val(data.tiposSanguineos['AB+'] || 0);
-                        $('#tipoAB-').val(data.tiposSanguineos['AB-'] || 0);
-                        $('#tipoO\\+').val(data.tiposSanguineos['O+'] || 0);
-                        $('#tipoO-').val(data.tiposSanguineos['O-'] || 0);
+                        hemocentros = data;
+                        const hemocentroPadrao = hemocentros[0];
+                        return obterBancoDeSangue(hemocentroPadrao.id);
                     })
-                    .catch(error => console.error('Erro ao obter dados do banco:', error));
+                    .catch(error => console.error('Erro ao obter hemocentros:', error));
             }
 
-            $('#editarEstoqueForm').submit(function(event) {
+            function obterBancoDeSangue(hemocentroId) {
+                return fetch(`https://hemocentro-pi.vercel.app/banco/${hemocentroId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        bancoDeSangue = data;
+                        return fetch(`https://hemocentro-pi.vercel.app/hemocentro/${bancoDeSangue.hemocentro_id}`);
+                    })
+                    .then(response => response.json())
+                    .then(hemocentro => {
+                        bancoDeSangue.hemocentro = hemocentro;
+                        document.getElementById('nome-hemocentro').textContent = hemocentro[0].nome;
+
+                        console.log('mensagem', bancoDeSangue)
+
+                        // Preencher os campos de entrada com os dados do banco de sangue
+                        document.getElementById('valorIdeal').value = bancoDeSangue.valorIdeal || '';
+                        document.getElementById('valorMin').value = bancoDeSangue.valorMin || '';
+                        document.getElementById('valorMax').value = bancoDeSangue.valorMax || '';
+                        document.getElementById('tipoA+').value = bancoDeSangue.tiposSanguineos['A+'] || '';
+                        document.getElementById('tipoA-').value = bancoDeSangue.tiposSanguineos['A-'] || '';
+                        document.getElementById('tipoB+').value = bancoDeSangue.tiposSanguineos['B+'] || '';
+                        document.getElementById('tipoB-').value = bancoDeSangue.tiposSanguineos['B-'] || '';
+                        document.getElementById('tipoAB+').value = bancoDeSangue.tiposSanguineos['AB+'] || '';
+                        document.getElementById('tipoAB-').value = bancoDeSangue.tiposSanguineos['AB-'] || '';
+                        document.getElementById('tipoO+').value = bancoDeSangue.tiposSanguineos['O+'] || '';
+                        document.getElementById('tipoO-').value = bancoDeSangue.tiposSanguineos['O-'] || '';
+                    })
+                    .catch(error => console.error('Erro ao obter banco de sangue:', error));
+            }
+
+            $('#editarEstoqueForm').on('submit', function(event) {
                 event.preventDefault();
-                atualizarEstoque();
+                atualizarEstoque(); 
             });
+
 
             function atualizarEstoque() {
                 const formData = {
@@ -149,12 +186,15 @@
                     }
                 };
 
+                console.log('Dados do formulário:', formData);
+
+                // Realizar a requisição AJAX para atualizar o estoque
                 $.ajax({
-                    url: `https://hemocentro-pi.vercel.app/banco/${hemocentroId}`,
+                    url: `https://hemocentro-pi.vercel.app/banco/${bancoDeSangue.hemocentro_id}`,
                     type: "PUT",
                     contentType: "application/json",
                     data: JSON.stringify(formData),
-                    success: function() {
+                    success: function(response) {
                         alert("Estoque atualizado com sucesso!");
                     },
                     error: function(xhr, status, error) {
@@ -164,13 +204,28 @@
                 });
             }
 
-            obterBancoDeSangue();
+            // Adiciona eventos de clique para os botões
+            $('#botao-anterior').on('click', function() {
+                const indexAtual = hemocentros.findIndex(hemocentro => hemocentro.id === bancoDeSangue.hemocentro_id);
+                const novoIndex = (indexAtual === 0) ? hemocentros.length - 1 : indexAtual - 1;
+                const novoHemocentro = hemocentros[novoIndex];
+                obterBancoDeSangue(novoHemocentro.id);
+            });
+
+            $('#botao-proximo').on('click', function() {
+                const indexAtual = hemocentros.findIndex(hemocentro => hemocentro.id === bancoDeSangue.hemocentro_id);
+                const novoIndex = (indexAtual === hemocentros.length - 1) ? 0 : indexAtual + 1;
+                const novoHemocentro = hemocentros[novoIndex];
+                obterBancoDeSangue(novoHemocentro.id);
+            });
+
+            obterHemocentros();
         });
-</script>
+    </script>
 
-
+    
 <?php
-    include '../partials/footer.php';
+    include '../../partials/footer.php';
 ?>
 
 </body>
