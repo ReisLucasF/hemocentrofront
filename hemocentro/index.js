@@ -104,7 +104,7 @@ function carregarCampanhas() {
     })
     .then(data => {
       const tbody = document.getElementById('tabela-campanhas');
-      tbody.innerHTML = ''; // Limpa a tabela antes de inserir novos dados
+      tbody.innerHTML = ''; 
 
       data.forEach(campanha => {
         const tr = document.createElement('tr');
@@ -154,13 +154,12 @@ function editarCampanha(id) {
 }
 
 
-// Chame a função para carregar as campanhas quando a página estiver pronta
 document.addEventListener('DOMContentLoaded', carregarCampanhas);
 
 function excluirCampanha(id) {
   const confirmar = confirm("Tem certeza que deseja excluir esta campanha?");
   if (!confirmar) {
-    return; // Se o usuário não confirmar, aborta a função
+    return; 
   }
 
   const apiUrl = `https://hemocentro-pi.vercel.app/campanhas/${id}`;
@@ -176,7 +175,7 @@ function excluirCampanha(id) {
   })
   .then(() => {
     alert('Campanha excluída com sucesso!');
-    carregarCampanhas(); // Recarrega as campanhas após a exclusão
+    carregarCampanhas();
   })
   .catch(error => {
     console.error('Erro:', error);
@@ -185,11 +184,9 @@ function excluirCampanha(id) {
 }
 
 
-// Função para popular o select com as cidades retornadas da API
 function popularSelectCidades(selectId) {
   const selectCidade = document.getElementById(selectId);
 
-  // Faz a requisição à API
   fetch('https://hemocentro-pi.vercel.app/hemocentro/cidades')
     .then(response => {
       if (!response.ok) {
@@ -198,16 +195,13 @@ function popularSelectCidades(selectId) {
       return response.json();
     })
     .then(data => {
-      // Limpa as opções existentes
       selectCidade.innerHTML = '';
 
-      // Adiciona uma opção padrão
       const optionDefault = document.createElement('option');
       optionDefault.value = '';
       optionDefault.textContent = 'Selecione uma cidade';
       selectCidade.appendChild(optionDefault);
 
-      // Adiciona as cidades retornadas como opções
       data.forEach(cidade => {
         const option = document.createElement('option');
         option.value = cidade;
@@ -217,13 +211,57 @@ function popularSelectCidades(selectId) {
     })
     .catch(error => {
       console.error('Erro ao buscar as cidades:', error);
-      // Você pode adicionar uma mensagem de erro aqui se desejar
     });
 }
 
-// Chama a função para popular os selects quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
   popularSelectCidades('editCidade');
   popularSelectCidades('novaCidade');
 });
 
+
+
+// niveis de sangue ####################################################
+
+
+
+// Função para atualizar o estoque
+function atualizarEstoque() {
+    const formData = {
+        valorIdeal: $('#valorIdeal').val(),
+        valorMin: $('#valorMin').val(),
+        valorMax: $('#valorMax').val(),
+        tiposSanguineos: {
+            'A+': $('#tipoA\\+').val(),
+            'A-': $('#tipoA-').val(),
+            'B+': $('#tipoB\\+').val(),
+            'B-': $('#tipoB-').val(),
+            'AB+': $('#tipoAB\\+').val(),
+            'AB-': $('#tipoAB-').val(),
+            'O+': $('#tipoO\\+').val(),
+            'O-': $('#tipoO-').val()
+        }
+    };
+
+    console.log('Dados do formulário:', formData); 
+
+    $.ajax({
+        url: `https://hemocentro-pi.vercel.app/banco/${bancoDeSangue.hemocentro_id}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function(response) {
+            alert("Estoque atualizado com sucesso!");
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro ao atualizar o estoque:", error);
+            alert("Erro ao atualizar o estoque. Verifique o console para mais detalhes.");
+        }
+    });
+}
+
+
+$('#editarEstoqueForm').on('submit', function(event) {
+    event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+    atualizarEstoque(); // Chama a função para atualizar o estoque
+});

@@ -162,49 +162,6 @@
                     .catch(error => console.error('Erro ao obter banco de sangue:', error));
             }
 
-            $('#editarEstoqueForm').on('submit', function(event) {
-                event.preventDefault(); // Evita o comportamento padrão de envio do formulário
-                atualizarEstoque(); // Chama a função para atualizar o estoque
-            });
-
-
-            // Função para atualizar o estoque
-            function atualizarEstoque() {
-                // Criar um objeto para armazenar os dados do formulário
-                const formData = {
-                    valorIdeal: $('#valorIdeal').val(),
-                    valorMin: $('#valorMin').val(),
-                    valorMax: $('#valorMax').val(),
-                    tiposSanguineos: {
-                        'A+': $('#tipoA\\+').val(),
-                        'A-': $('#tipoA-').val(),
-                        'B+': $('#tipoB\\+').val(),
-                        'B-': $('#tipoB-').val(),
-                        'AB+': $('#tipoAB\\+').val(),
-                        'AB-': $('#tipoAB-').val(),
-                        'O+': $('#tipoO\\+').val(),
-                        'O-': $('#tipoO-').val()
-                    }
-                };
-
-                console.log('Dados do formulário:', formData); // Verifica se os dados do formulário estão corretos
-
-                // Realizar a requisição AJAX para atualizar o estoque
-                $.ajax({
-                    url: `http://localhost:3000/banco/${bancoDeSangue.hemocentro_id}`,
-                    type: "PUT",
-                    contentType: "application/json",
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        alert("Estoque atualizado com sucesso!");
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Erro ao atualizar o estoque:", error);
-                        alert("Erro ao atualizar o estoque. Verifique o console para mais detalhes.");
-                    }
-                });
-            }
-
             // Adiciona eventos de clique para os botões
             $('#botao-anterior').on('click', function() {
                 const indexAtual = hemocentros.findIndex(hemocentro => hemocentro.id === bancoDeSangue.hemocentro_id);
