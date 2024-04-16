@@ -14,9 +14,6 @@
         preencherModalEditarHemocentro(hemocentro);
         $('#editarHemocentroModal').modal('show');
       }));
-      colunaAcoes.append($('<button>').addClass('btn btn-danger btn-sm').text('Excluir').on('click', function() {
-        console.log('Excluir: ' + hemocentro.nome);
-      }));
       linha.append(colunaAcoes);
       tabelaBody.append(linha);
     });

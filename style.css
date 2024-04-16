@@ -103,7 +103,7 @@ section-2 {
 /* form agendamento */
 .formAgendamento {
     color: #000000 !important;
-    background: linear-gradient(166deg, #ffffffe3, #fafafae8, #c2c2c2d7);
+    background: linear-gradient(329deg, #ffffffc9, #fafafa9a, #c2c2c283);
     border-radius: 15px;
     margin-bottom: 10rem;
     padding: 15px;
@@ -119,4 +119,196 @@ section-2 {
         width: 40px;
     }
 }
+/* wellington */
 
+
+.formCadastro {
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 10%;
+}
+
+.formCadastro h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin: 5;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group p {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.check {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #000000;
+}
+
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #BB343E;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #ffffff;
+}
+
+.title {
+    color: #000000
+}
+
+.limit {
+    text-align: -webkit-center
+}
+
+
+/* campanhas */
+
+
+.filtros {
+    margin: 3vh auto;
+    padding: 2vh;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5%;
+    background: linear-gradient(174deg, #ffffff, rgb(250, 250, 250), #ffffff);
+}
+
+
+.filtro {
+    border-bottom: 1px solid #000000;
+    margin: 1vh;
+    transition: all .4s;
+}
+
+.filtro:hover {
+    scale: 1.02;
+}
+
+select {
+    border: none;
+    background: none;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid #dd4a48;
+}
+
+.solicitacao {
+    background: linear-gradient(174deg, #ffffff, #ffffff, #ffffff);
+    border-radius: 20px;
+    height: auto;
+    padding: 2vh 1vw;
+    margin: .5em .5em;
+}
+
+.solicitacao:hover {
+    scale: 1.02;
+    box-shadow: 0px 0px 5px #000000d3;
+}
+
+.solicitacao a {
+    text-decoration: none;
+    color: #dd4a48;
+    font-weight: 600;
+    transition: all .2;
+    display: flex;
+    justify-content: center;
+    margin-top: .5em;
+}
+
+.solicitacao a:hover {
+    font-weight: 900;
+}
+
+.solicitacoes {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 5vh;
+}
+.solicitante{
+    color: #000000;
+}
+
+@media screen and (max-width: 1108px) {
+    .solicitacao {
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .solicitacao {
+        width: 90vw;
+        padding: 20px;
+    }
+}
+
+.col-auto {
+    width: 70px;
+    height: 40;
+    border-radius: 100%;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    max-width: 100%;
+}
+
+.btn-niveis {
+    width: 100%;
+    background-color: #ffffff;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.campanhasMenu{
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 50px;
+}
+
+.btnAcoes{
+    width: 45%;
+}
+.btnAcoes:hover{
+    width: 45%;
+    background-color: #75242a;
+}
+
+.btnADC{
+    width: 250px;
+    color: #000;
+    background-color: #ffffff;
+}

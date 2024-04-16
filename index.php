@@ -36,15 +36,15 @@
         <h2>Indicadores</h2>
         <p>Nossos indicadores sanguíneos.</p>
         <!-- Grid dos Estoques -->
-        <header class="row align-items-center">
+        <header class="row align-items-center mb-2">
             <div class="col-auto">
-                <button class="btn btn-secondary seta-anterior" id="botao-anterior">&lt;</button>
+                <button class="btn btn-niveis btn-secondary seta-anterior" id="botao-anterior">&lt;</button>
             </div>
             <div class="col">
                 <h2 class="text-center" id="nome-hemocentro">Nome do Hemocentro</h2>
             </div>
             <div class="col-auto">
-                <button class="btn btn-secondary seta-proxima" id="botao-proximo">&gt;</button>
+                <button class="btn btn-niveis btn-secondary seta-proxima" id="botao-proximo">&gt;</button>
             </div>
         </header>
 

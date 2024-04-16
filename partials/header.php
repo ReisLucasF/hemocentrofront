@@ -35,6 +35,9 @@ $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='ima
                     menuUsuario.append('<li class="nav-item">' +
                                             '<a class="nav-link" href="<?php echo $domain; ?>/hemocentro/index.php">Painel</a>' +
                                         '</li>' +
+                                        '<li class="nav-item">' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/hemocentro/campanhas.php">Campanhas</a>' +
+                                        '</li>' +
                                         '<li class="nav-item dropdown">' +
                                             '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                                                 usuario.usuario.nome +
@@ -49,8 +52,11 @@ $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='ima
                 } else {
                     //doador
                     menuUsuario.append('<li class="nav-item">' +
-                                            '<a class="nav-link" href="<?php echo $domain; ?>/doador/criar_agendamento.php">Criar agendamento</a>' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/doador/criar_agendamento.php">Doar</a>' +
                                         '</li>'+
+                                        '<li class="nav-item">' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/campanhas.php">Campanhas</a>' +
+                                        '</li>' +
                                         '<li class="nav-item dropdown">' +
                                             '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                                                 usuario.usuario.nome +
@@ -68,6 +74,9 @@ $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='ima
                 menuUsuario.append('<li class="nav-item">' +
                                         '<a class="nav-link" href="<?php echo $domain; ?>/sobre.php">Sobre</a>' +
                                     '</li>'+
+                                    '<li class="nav-item">' +
+                                            '<a class="nav-link" href="<?php echo $domain; ?>/campanhas.php">Campanhas</a>' +
+                                        '</li>' +
                                     '<li class="nav-item">' +
                                         '<a class="nav-link login" href="<?php echo $domain; ?>/login.php">Login</a>' +
                                     '</li>'
