@@ -43,7 +43,7 @@ $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='ima
                                                 usuario.usuario.nome +
                                             '</a>' +
                                             '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">' +
-                                                '<a class="dropdown-item" href="#">Perfil</a>' +
+                                                '<a class="dropdown-item" href="<?php echo $domain; ?>/hemocentro/perfil/">Perfil</a>' +
                                                 '<div class="dropdown-divider"></div>' +
                                                 '<a class="dropdown-item logout-btn" href="#">Logout</a>' +
                                             '</div>' +
@@ -62,7 +62,7 @@ $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='ima
                                                 usuario.usuario.nome +
                                             '</a>' +
                                             '<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">' +
-                                                '<a class="dropdown-item" href="#">Perfil</a>' +
+                                                '<a class="dropdown-item" href="<?php echo $domain; ?>/doador/">Perfil</a>' +
                                                 '<div class="dropdown-divider"></div>' +
                                                 '<a class="dropdown-item logout-btn" href="#">Logout</a>' +
                                             '</div>' +

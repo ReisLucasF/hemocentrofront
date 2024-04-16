@@ -1,6 +1,9 @@
 
 <?php
+    require_once '../auth.php';
+
     include '../partials/header.php';
+
 ?>
 
 <!DOCTYPE html>

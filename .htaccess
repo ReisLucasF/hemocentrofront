@@ -1,0 +1,4 @@
+# Redireciona todos os acessos a uma pasta específica
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/pasta-protegida/
+RewriteRule ^(.*)$ /caminho/para/login.php [R=302,L]
