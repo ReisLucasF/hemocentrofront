@@ -17,7 +17,6 @@ function atualizarEstoque() {
         }
     };
 
-    console.log('Dados do formulário:', formData); 
 
     $.ajax({
         url: `https://hemocentro-pi.vercel.app/banco/${bancoDeSangue.hemocentro_id}`,

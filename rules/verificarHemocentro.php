@@ -8,7 +8,6 @@
 
         if (usuarioLogado) {
             var usuario = JSON.parse(usuarioLogado);
-            console.log(usuario)
             if (usuario.usuario.tipoUsuario === 'hemocentro') {
             }else{
                 window.location.href = '<?php echo $domain; ?>/login.php';
