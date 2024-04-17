@@ -56,9 +56,12 @@ $titlesite = "Hemocentro";
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>
-    $('.logout-btn').click(function(event) {
-        event.preventDefault();
-        sessionStorage.removeItem('usuarioLogado');
-        window.location.href = '<?php echo $domain; ?>/login.php';
+    $(document).ready(function() {
+        $('.logout-btn').click(function(event) {
+            event.preventDefault();
+            sessionStorage.removeItem('usuarioLogado');
+
+            window.location.href = '<?php echo $domain; ?>/logout.php'; // Assegure-se de ajustar o caminho conforme necessário
+        });
     });
 </script>
