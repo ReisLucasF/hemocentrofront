@@ -1,24 +1,27 @@
 
-
+<?php
+    include './partials/header.php';
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Camapanhas</title>
+  <title>Layout de Grid com Bootstrap</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   
+<!-- Bootstrap JS e jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
   <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">
+  <?php echo $favicon; ?>
 </head>
 <style>
 
 </style>
 <body>
-  <?php
-    include './partials/header.php';
-  ?>
-  
   <div class="container">
       <h2>Últimas solicitações</h2>
 
@@ -113,7 +116,9 @@
 
       FiltroCadastro();
     </script>
- 
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  
 <?php
     include './partials/footer.php';
 ?>
