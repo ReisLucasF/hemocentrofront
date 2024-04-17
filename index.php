@@ -80,7 +80,7 @@
       <div class="col  text-center">
         <h2>Agende sua Doação</h2>
         <p>Seja um doador recorrente.</p>
-        <a href="<?php echo $domain; ?>/criar_agendamento.php"><img  class="agenda" src="./img/calendario.png" alt=""></a>
+        <a href="<?php echo $domain; ?>/doador/criar_agendamento.php"><img  class="agenda" src="./img/calendario.png" alt=""></a>
       </div>
     </div>
   </div>
