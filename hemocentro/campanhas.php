@@ -1,7 +1,4 @@
 
-<?php
-    include '../partials/header.php';
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,13 +8,16 @@
   <title>Layout de Grid com Bootstrap</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="../style.css">
-  <?php echo $favicon; ?>
+  <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">
 </head>
 <style>
 
 </style>
 <body>
-    <div class="container mt-4">
+  <?php
+      include '../partials/header.php';
+  ?>
+  <div class="container mt-4">
       <button class="btn btn-sm btnADC mb-2" data-toggle="modal" data-target="#modalAdicionarCampanha">Adicionar</button>
   <h2>Campanhas/Solicitações</h2>
   <div class="campanhasMenu">

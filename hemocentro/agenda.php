@@ -1,64 +1,63 @@
 <?php
-include '../partials/header.php';
 
 function obterDadosDaAPI($url) {
-    $ch = curl_init($url);
-    
-    curl_setopt_array($ch, [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_SSL_VERIFYHOST => false,
-        CURLOPT_HTTPHEADER => [
-            'Content-Type: application/json',
-            'Accept: application/json',
-        ],
-    ]);
-    $resposta = curl_exec($ch);
-    $statusHttp = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    if (curl_errno($ch)) {
-        throw new Exception("Erro de cURL: " . curl_error($ch));
-    }
-    if ($statusHttp != 200) {
-        throw new Exception("Erro HTTP: $statusHttp");
-    }
-    curl_close($ch);
-    return $resposta;
+  $ch = curl_init($url);
+  
+  curl_setopt_array($ch, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_SSL_VERIFYPEER => false,
+    CURLOPT_SSL_VERIFYHOST => false,
+    CURLOPT_HTTPHEADER => [
+      'Content-Type: application/json',
+      'Accept: application/json',
+    ],
+  ]);
+  $resposta = curl_exec($ch);
+  $statusHttp = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  if (curl_errno($ch)) {
+    throw new Exception("Erro de cURL: " . curl_error($ch));
+  }
+  if ($statusHttp != 200) {
+    throw new Exception("Erro HTTP: $statusHttp");
+  }
+  curl_close($ch);
+  return $resposta;
 }
 
 function transformarEventos($dadosApi) {
-    $eventos = [];
-    foreach ($dadosApi as $agendamento) {
-        $eventos[] = [
-            'id' => $agendamento['id'],
-            'title' => $agendamento['nome'],
-            'start' => $agendamento['dataAgendamento'],
-            'end' => $agendamento['dataFim'],
-            'color' => '#257e4a',
-            'extendedProps' => [
+  $eventos = [];
+  foreach ($dadosApi as $agendamento) {
+    $eventos[] = [
+      'id' => $agendamento['id'],
+      'title' => $agendamento['nome'],
+      'start' => $agendamento['dataAgendamento'],
+      'end' => $agendamento['dataFim'],
+      'color' => '#257e4a',
+      'extendedProps' => [
                 'nome' => $agendamento['nome'],
                 'email' => $agendamento['eMail'],
-            ],
-        ];
-    }
-    return $eventos;
-}
-
-try {
-    $config_file = '../config/config.json';
-    $config_content = file_get_contents($config_file);
-    $config = json_decode($config_content, true);
-
-    $api_url = rtrim($config['linkapi'], '/') . '/agendamentos';
-    
-    $resposta = obterDadosDaAPI($api_url);
-    $dadosApi = json_decode($resposta, true);
-    
-    $eventos = transformarEventos($dadosApi);
-    
-} catch (Exception $e) {
-    echo $e->getMessage();
-}
-?>
+              ],
+            ];
+          }
+          return $eventos;
+        }
+        
+        try {
+          $config_file = '../config/config.json';
+          $config_content = file_get_contents($config_file);
+          $config = json_decode($config_content, true);
+          
+          $api_url = rtrim($config['linkapi'], '/') . '/agendamentos';
+          
+          $resposta = obterDadosDaAPI($api_url);
+          $dadosApi = json_decode($resposta, true);
+          
+          $eventos = transformarEventos($dadosApi);
+          
+        } catch (Exception $e) {
+          echo $e->getMessage();
+        }
+        ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -76,30 +75,33 @@ try {
     <link rel="stylesheet" href="../style.css">
     <script src='../fullcalendar/dist/index.global.js'></script>
     <script src="../fullcalendar/packages/core/locales/pt-br.global.js"></script>
-    <?php echo $favicon; ?>
+    <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">
   </head>
-
-
-
+  
+  
+  
   <?php
     include '../models/style.php'
+    ?>
+
+<body>
+  <?php
+    include '../partials/header.php';
   ?>
-
-  <body>
-    <div id="calendar"></div>
-
-    <script>
-      var eventId;
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          locale: 'pt-br',
-          monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-          buttonText: {
-            today: "Hoje",
+  <div id="calendar"></div>
+  
+  <script>
+    var eventId;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      
+      
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'pt-br',
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        buttonText: {
+          today: "Hoje",
             month: "Mês",
             week: "Semana",
             day: "Dia",

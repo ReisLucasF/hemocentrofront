@@ -1,7 +1,4 @@
 
-<?php
-    include './partials/header.php';
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,6 +22,11 @@
   }
 </style>
 <body>
+    
+    <?php
+        include './partials/header.php';
+    ?>
+    
   <div class="container">
     <div class="row">
       <div class="col">

@@ -1,8 +1,3 @@
-<?php
-include './partials/header.php';
-
-
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,8 +12,12 @@ include './partials/header.php';
     <script src="https://code.jquery.com/jquery-4.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">
   </head>
   <body>
+    <?php
+      include './partials/header.php';
+    ?>
       <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">

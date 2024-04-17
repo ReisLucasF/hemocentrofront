@@ -1,7 +1,4 @@
 
-<?php
-    include '../partials/header.php';
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -14,10 +11,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="./grid.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KXQo5qByhwpDS6Zk+AH9C7wE/R5K9aDjEGI1fL5VozM=" crossorigin="anonymous"></script>
-  <?php echo $favicon; ?>
+  <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">
 </head>
 
 <body>
+  <?php
+      include '../partials/header.php';
+  ?>
   <div class="container">
     <div class="principal">
       <div class="grid-container">
