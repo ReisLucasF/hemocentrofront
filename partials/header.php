@@ -61,7 +61,7 @@ $titlesite = "Hemocentro";
             event.preventDefault();
             sessionStorage.removeItem('usuarioLogado');
 
-            window.location.href = '<?php echo $domain; ?>/logout.php'; // Assegure-se de ajustar o caminho conforme necessário
+            window.location.href = '<?php echo $domain; ?>/logout.php';
         });
     });
 </script>

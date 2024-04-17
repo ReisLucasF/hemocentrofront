@@ -91,7 +91,7 @@
         </div>
 
         <?php
-            include './agendamento/fetchAgendamento.php'
+            include './doador/fetchAgendamento.php'
         ?>
 
         <?php

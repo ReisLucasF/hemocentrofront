@@ -115,13 +115,13 @@
 
             function obterBancoDeSangue() {
                 if (!hemocentroId) return;
-                fetch(`https://hemocentro-pi.vercel.app/banco/4`)
+                fetch(`https://hemocentro-pi.vercel.app/banco/${hemocentroId}`)
                     .then(response => response.json())
                     .then(data => {
                         $('#valorIdeal').val(data.valorIdeal || '');
                         $('#valorMin').val(data.valorMin || '');
                         $('#valorMax').val(data.valorMax || '');
-                        $('#tipoA\\+').val(data.tiposSanguineos['A+'] || 0); // Use '\\+' para escapar o caractere '+' no seletor
+                        $('#tipoA\\+').val(data.tiposSanguineos['A+'] || 0); 
                         $('#tipoA-').val(data.tiposSanguineos['A-'] || 0);
                         $('#tipoB\\+').val(data.tiposSanguineos['B+'] || 0);
                         $('#tipoB-').val(data.tiposSanguineos['B-'] || 0);
