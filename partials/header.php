@@ -52,9 +52,6 @@ $titlesite = "Hemocentro";
     </div>
 </nav>
 
-
-
-
 <script>
     $(document).ready(function() {
         $('.logout-btn').click(function(event) {

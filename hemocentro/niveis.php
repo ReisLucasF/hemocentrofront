@@ -106,8 +106,8 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KXQo5qByhwpDS6Zk+AH9C7wE/R5K9aDjEGI1fL5VozM=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
             let usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
@@ -174,7 +174,6 @@
         });
 </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <?php
     include '../partials/footer.php';
 ?>

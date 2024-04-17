@@ -258,3 +258,6 @@ $('#editarEstoqueForm').on('submit', function(event) {
     event.preventDefault(); // Evita o comportamento padrão de envio do formulário
     atualizarEstoque(); // Chama a função para atualizar o estoque
 });
+
+
+
