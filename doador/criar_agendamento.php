@@ -1,9 +1,5 @@
-<?php
-    include '../partials/header.php';
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +7,6 @@
     <!-- Adicione os links para o Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
-
     <!-- Adicione os links para o Bootstrap CSS e JavaScript -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -21,9 +16,11 @@
     <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">
 </head>
     <body>
+        <?php
+            include '../partials/header.php';
+        ?>
         <div class="container mt-5 formAgendamento">
             <h2 class="mb-4">Criar Novo Agendamento</h2>
-            <!-- Formulário de Criação de Agendamento -->
             <form id="criarAgendamentoForm">
                 <div class="form-group">
                     <label for="municipio">Município:</label>
