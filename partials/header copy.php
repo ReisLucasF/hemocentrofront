@@ -1,7 +1,7 @@
 <?php
 global $domain;
 $siteUrl = $_SERVER['HTTP_HOST'];
-$domain = "http://{$siteUrl}/hemocentro";
+$domain = "http://{$siteUrl}";
 global $favicon;
 $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='image/x-icon'>";
 global $titlesite;
@@ -85,10 +85,12 @@ $titlesite = "Hemocentro";
                                     );
             }
 
-            $('.logout-btn').click(function(event) {
-                event.preventDefault();
-                sessionStorage.removeItem('usuarioLogado');
-                window.location.href = '<?php echo $domain; ?>/login.php';
+            $(document).ready(function() {
+                $('.logout-btn').click(function(event) {
+                    event.preventDefault();
+                    sessionStorage.removeItem('usuarioLogado');
+                    window.location.href = '<?php echo $domain; ?>/logout.php';
+                });
             });
         }
 
