@@ -46,7 +46,7 @@ $titlesite = "Hemocentro";
             <?php else: ?>
                 <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/sobre.php">Sobre</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/campanhas.php">Campanhas</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo $domain; ?>/login.php">Login</a></li>
+                <li class="nav-item"><a class="nav-link  login" href="<?php echo $domain; ?>/login.php">Login</a></li>
             <?php endif; ?>
         </ul>
     </div>
