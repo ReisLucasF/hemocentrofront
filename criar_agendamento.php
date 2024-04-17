@@ -1,3 +1,6 @@
+<?php
+    include './partials/header.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,14 +17,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>    
-    <script src="./config/lang.js"></script> 
-    <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">   
+    <script src="./config/lang.js"></script>    
 </head>
 <body>
-
-<?php
-    include './partials/header.php';
-?>
 
 <div class="container mt-5 formAgendamento">
     <h2 class="mb-4">Criar Novo Agendamento</h2>
@@ -59,6 +57,10 @@
             <label for="telefone">Telefone:</label>
             <input type="tel" id="telefone" name="telefone" class="form-control">
         </div>
+        <!-- <div class="form-group">
+            <label for="dataAgendamento">Data do Agendamento:</label>
+            <input type="date" id="dataAgendamento" name="dataAgendamento" class="form-control" required>
+        </div> -->
         <div class="form-group">
             <label for="dataAgendamento">Data do Agendamento:</label>
             <div class="input-group">
@@ -87,188 +89,17 @@
     </form>
 </div>
 
-<script>
-fetch('../config/config.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao carregar config.json');
-        }
-        return response.json();
-    })
-    .then(config => {
-        document.getElementById('criarAgendamentoForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            if (!this.checkValidity()) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-            
-            var formData = new FormData(this);
-            var object = {};
-            formData.forEach((value, key) => { object[key] = value; });
-            var json = JSON.stringify(object);
-        
-            console.log('JSON enviado para o backend:', json);
-        
-            fetch(`${config.linkapi}/agendamentos`, {
-                method: 'POST',
-                body: json,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('A resposta da rede não foi ok.');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                alert('Agendamento criado com sucesso!');
-                // Redirecionar para outra página após criar o agendamento, se necessário
-                window.location.href = '<?php echo $domain; ?>';
-            })
-            .catch(error => {
-                console.error('Erro ao criar agendamento:', error);
-                alert('Erro ao criar agendamento. Verifique o console para mais detalhes.');
-            });
-        });
-    })
-    .catch(error => {
-        console.error(error);
-        alert('Erro ao carregar config.json. Verifique o console para mais detalhes.');
-    });
-</script>
-
-
-
-<script>
-$(document).ready(function() {
-    $('#dataAgendamento').datepicker({
-        format: 'dd/mm/yyyy',
-        autoclose: true,
-        todayHighlight: true,
-        startDate: new Date(),
-        daysOfWeekDisabled: '0,6',
-        language: 'pt-BR'
-    }).on('changeDate', function(e) {
-        // A data está no formato dd/mm/yyyy, precisa ser convertida para yyyy-mm-dd
-        const dataFormatada = e.format('yyyy-mm-dd');
-        console.log(dataFormatada); // Deve mostrar a data no console
-        habilitarHorarios(dataFormatada);
-        atualizarHorariosDisponiveis(dataFormatada);
-    });
-
-    function habilitarHorarios(data) {
-        const horaAgendamento = $('#horaAgendamento');
-        horaAgendamento.prop('disabled', !data);
-        if (!data) {
-            horaAgendamento.val('');
-        }
-    }
-
-    function atualizarHorariosDisponiveis(dataSelecionada) {
-        // Assegure-se de que dataSelecionada está no formato correto esperado pela API
-        fetch(`https://hemocentro.vercel.app/disponibilidade/${dataSelecionada}`)
-            .then(response => response.json())
-            .then(data => {
-                const selectHoras = $('#horaAgendamento');
-                selectHoras.empty();
-                if (data.horariosDisponiveis && data.horariosDisponiveis.length) {
-                    data.horariosDisponiveis.forEach(horario => {
-                        selectHoras.append(new Option(horario, horario));
-                    });
-                } else {
-                    selectHoras.append(new Option('Não há horários disponíveis', ''));
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-    }
-
-    // Defina a data atual como valor padrão e atualize os horários disponíveis
-    const dataAtual = new Date().toISOString().split('T')[0];
-    $('#dataAgendamento').datepicker('update', dataAtual);
-    atualizarHorariosDisponiveis(dataAtual);
-});
-
-</script>
+<?php
+    include './agendamento/fetchAgendamento.php'
+?>
 
 <?php
     include './rules/verificarDoador.php'
 ?>
 
-<script>
-    var usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-
-    if (usuarioLogado && usuarioLogado.usuario) {
-        var usuario = usuarioLogado.usuario;
-
-        document.getElementById('nome').value = usuario.nome;
-        document.getElementById('email').value = usuario.email;
-        document.getElementById('cpf').value = usuario.cpf;
-        document.getElementById('dataNascimento').value = usuario.dataNascimento ? new Date(usuario.dataNascimento).toISOString().split('T')[0] : '';
-    }
-</script>
-
-<script>
-    function preencherMunicipios() {
-        fetch('https://hemocentro-pi.vercel.app/hemocentro/cidades')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao obter lista de municípios');
-                }
-                return response.json();
-            })
-            .then(data => {
-                var selectMunicipio = document.getElementById("municipio");
-                selectMunicipio.innerHTML = '<option value="">Selecione um município</option>';
-
-                data.forEach(function(municipio) {
-                    var option = document.createElement("option");
-                    option.text = municipio;
-                    option.value = municipio;
-                    selectMunicipio.add(option);
-                });
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-    }
-
-    preencherMunicipios();
-
-    function preencherHemocentros() {
-        var municipioSelecionado = document.getElementById("municipio").value;
-
-        fetch(`https://hemocentro-pi.vercel.app/hemocentro/${municipioSelecionado}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao obter lista de hemocentros');
-                }
-                return response.json();
-            })
-            .then(data => {
-                var selectHemocentro = document.getElementById("hemocentro");
-                selectHemocentro.innerHTML = '<option value="">Selecione o hemocentro</option>';
-
-                data.forEach(function(hemocentro) {
-                    var option = document.createElement("option");
-                    option.text = hemocentro.nome;
-                    option.value = hemocentro.id; // Se o ID for usado como valor
-                    selectHemocentro.add(option);
-                });
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-    }
-
-    document.getElementById("municipio").addEventListener("change", preencherHemocentros);
-</script>
+<?php
+    include './agendamento/regrasHorarios.php'
+?>
 
 <?php
     include './partials/footer.php';

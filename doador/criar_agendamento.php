@@ -1,24 +1,27 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Novo Agendamento</title>
-    <!-- Adicione os links para o Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
-    <!-- Adicione os links para o Bootstrap CSS e JavaScript -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>    
-    <script src="../config/lang.js"></script>    
-    <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">
-</head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Criar Novo Agendamento</title>
+        <!-- Adicione os links para o Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../style.css">
+
+        <!-- Adicione os links para o Bootstrap CSS e JavaScript -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>    
+        <script src="./config/lang.js"></script>    
+    </head>
+
     <body>
         <?php
             include '../partials/header.php';
         ?>
+
         <div class="container mt-5 formAgendamento">
             <h2 class="mb-4">Criar Novo Agendamento</h2>
             <form id="criarAgendamentoForm">
@@ -54,10 +57,6 @@
                     <label for="telefone">Telefone:</label>
                     <input type="tel" id="telefone" name="telefone" class="form-control">
                 </div>
-                <!-- <div class="form-group">
-                    <label for="dataAgendamento">Data do Agendamento:</label>
-                    <input type="date" id="dataAgendamento" name="dataAgendamento" class="form-control" required>
-                </div> -->
                 <div class="form-group">
                     <label for="dataAgendamento">Data do Agendamento:</label>
                     <div class="input-group">
@@ -90,21 +89,73 @@
             include './fetchAgendamento.php'
         ?>
 
-        <?php
-            include '../rules/verificarDoador.php'
-        ?>
+        <script>
+            var usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
 
+            if (usuarioLogado) {
+                var usuario = usuarioLogado;
 
-        <?php
-            include './regrasHorarios.php'
-        ?>
+                document.getElementById('nome').value = usuario.nome;
+                document.getElementById('email').value = usuario.email;
+                document.getElementById('cpf').value = usuario.cpf;
+                document.getElementById('dataNascimento').value = usuario.dataNascimento ? new Date(usuario.dataNascimento).toISOString().split('T')[0] : '';
+            }
+        </script>
 
+        <script>
+            $(document).ready(function() {
+                $('#dataAgendamento').datepicker({
+                    format: 'dd/mm/yyyy',
+                    autoclose: true,
+                    todayHighlight: true,
+                    startDate: new Date(),
+                    daysOfWeekDisabled: '0,6',
+                    language: 'pt-BR'
+                }).on('changeDate', function(e) {
+                    // A data está no formato dd/mm/yyyy, precisa ser convertida para yyyy-mm-dd
+                    const dataFormatada = e.format('yyyy-mm-dd');
+                    console.log(dataFormatada); // Deve mostrar a data no console
+                    habilitarHorarios(dataFormatada);
+                    atualizarHorariosDisponiveis(dataFormatada);
+                });
+
+                function habilitarHorarios(data) {
+                    const horaAgendamento = $('#horaAgendamento');
+                    horaAgendamento.prop('disabled', !data);
+                    if (!data) {
+                        horaAgendamento.val('');
+                    }
+                }
+
+                function atualizarHorariosDisponiveis(dataSelecionada) {
+                    // Assegure-se de que dataSelecionada está no formato correto esperado pela API
+                    fetch(`https://hemocentro.vercel.app/disponibilidade/${dataSelecionada}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const selectHoras = $('#horaAgendamento');
+                            selectHoras.empty();
+                            if (data.horariosDisponiveis && data.horariosDisponiveis.length) {
+                                data.horariosDisponiveis.forEach(horario => {
+                                    selectHoras.append(new Option(horario, horario));
+                                });
+                            } else {
+                                selectHoras.append(new Option('Não há horários disponíveis', ''));
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro:', error);
+                        });
+                }
+
+                const dataAtual = new Date().toISOString().split('T')[0];
+                $('#dataAgendamento').datepicker('update', dataAtual);
+                atualizarHorariosDisponiveis(dataAtual);
+            });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <?php
             include '../partials/footer.php';
         ?>
-
-        <!-- Adicione o link para o jQuery e o Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KXQo5qByhwpDS6Zk+AH9C7wE/R5K9aDjEGI1fL5VozM=" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

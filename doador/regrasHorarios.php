@@ -55,8 +55,8 @@ $(document).ready(function() {
 <script>
     var usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
 
-    if (usuarioLogado && usuarioLogado.usuario) {
-        var usuario = usuarioLogado.usuario;
+    if (usuarioLogado) {
+        var usuario = usuarioLogado;
 
         document.getElementById('nome').value = usuario.nome;
         document.getElementById('email').value = usuario.email;

@@ -2,7 +2,7 @@
 session_start();
 global $domain;
 $siteUrl = $_SERVER['HTTP_HOST'];
-$domain = "http://{$siteUrl}";
+$domain = "http://{$siteUrl}/hemocentro";
 global $favicon;
 $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='image/x-icon'>";
 global $titlesite;
@@ -53,7 +53,7 @@ $titlesite = "Hemocentro";
 </nav>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 
 <script>
     $(document).ready(function() {
