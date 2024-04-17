@@ -1,9 +1,10 @@
 <?php
 global $domain;
 $siteUrl = $_SERVER['HTTP_HOST'];
-$domain = "http://{$siteUrl}";
+$domain = "http://{$siteUrl}/hemocentro";
 global $favicon;
 $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='image/x-icon'>";
+$titlesite = "Hemocentro";
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark  transparent-navbar">
