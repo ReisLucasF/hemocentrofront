@@ -18,6 +18,7 @@
   <?php
       include '../partials/header.php';
   ?>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
   <div class="container">
     <div class="principal">
