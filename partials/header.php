@@ -2,7 +2,7 @@
 session_start();
 global $domain;
 $siteUrl = $_SERVER['HTTP_HOST'];
-$domain = "http://{$siteUrl}/hemocentro";
+$domain = "http://{$siteUrl}";
 global $favicon;
 $favicon = "<link rel='shortcut icon' href='{$domain}/img/favicon.png' type='image/x-icon'>";
 global $titlesite;
