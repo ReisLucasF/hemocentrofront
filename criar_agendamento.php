@@ -99,7 +99,7 @@
         ?>
 
         <?php
-            include './agendamento/regrasHorarios.php'
+            include './doador/regrasHorarios.php'
         ?>
 
         <?php
