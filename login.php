@@ -61,52 +61,67 @@
 
 
  <script>
-   $(document).ready(function () {
-        $('#loginForm').submit(function (event) {
-            event.preventDefault();
+    $(document).ready(function () {
+      $('#loginForm').submit(function (event) {
+          event.preventDefault();
+          var formData = {
+              tipoUsuario: $('#tipoUsuario').val(),
+              cpf: $('#cpf').val(),
+              senha: $('#senha').val()
+          };
 
-            var formData = {
-                tipoUsuario: $('#tipoUsuario').val(),
-                cpf: $('#cpf').val(),
-                senha: $('#senha').val()
-            };
-
-            $.ajax({
-    url: './config/config.json',
-    type: 'GET',
-    dataType: 'json',
-    success: function(config) {
-        var apiUrl = config.linkapi + '/usuarios/login'; 
           $.ajax({
-                  type: 'POST',
-                  url: apiUrl,
-                  data: JSON.stringify(formData),
-                  contentType: 'application/json',
-                  success: function(response) {
-                      if (response.error) {
-                          alert(response.error);
-                          return;
+              url: './config/config.json',
+              type: 'GET',
+              dataType: 'json',
+              success: function(config) {
+                  var apiUrl = config.linkapi + '/usuarios/login';
+                  $.ajax({
+                      type: 'POST',
+                      url: apiUrl,
+                      data: JSON.stringify(formData),
+                      contentType: 'application/json',
+                      success: function(response) {
+                          if (response.error) {
+                              alert(response.error);
+                              return;
+                          }
+                          // Salvando no sessionStorage
+                          sessionStorage.setItem('usuarioLogado', JSON.stringify(response.usuario));
+                          // Chamada para configurar a sessão no PHP
+                          configurarSessaoPHP(response.usuario);
+                      },
+                      error: function(xhr) {
+                          console.error('Erro de autenticação:', xhr.responseText);
+                          alert('CPF, senha ou tipo de usuário incorretos. Por favor, tente novamente.');
                       }
-                      sessionStorage.setItem('usuarioLogado', JSON.stringify(response.usuario)); 
-
-                      if (response.usuario.tipoUsuario === 'hemocentro') {
-                          window.location.href = 'hemocentro/index.php';
-                      } else if (response.usuario.tipoUsuario === 'doador') {
-                          window.location.href = 'index.php';
-                      }
-                  },
-                  error: function(xhr, status, error) {
-                      console.error('Erro de autenticação:', xhr.responseText);
-                      alert('CPF, senha ou tipo de usuário incorretos. Por favor, tente novamente.');
-                  }
-                });
+                  });
               },
-              error: function(xhr, status, error) {
-                  alert('Erro ao obter configuração: ' + error);
+              error: function(xhr) {
+                  alert('Erro ao obter configuração: ' + xhr.responseText);
               }
           });
-        });
-    });
+      });
+  });
+
+  function configurarSessaoPHP(usuario) {
+      $.ajax({
+          type: 'POST',
+          url: 'set_session.php',
+          data: {usuarioLogado: JSON.stringify(usuario)},
+          success: function() {
+              // Redirecionamento baseado no tipo do usuário
+              if (usuario.tipoUsuario === 'hemocentro') {
+                  window.location.href = 'hemocentro/index.php';
+              } else if (usuario.tipoUsuario === 'doador') {
+                  window.location.href = 'index.php';
+              }
+          },
+          error: function(xhr) {
+              console.error('Erro ao salvar dados da sessão no servidor:', xhr.responseText);
+          }
+      });
+  }
 </script>
 <?php
   include './partials/footer.php';

@@ -18,6 +18,7 @@
   <?php
       include '../partials/header.php';
   ?>
+
   <div class="container">
     <div class="principal">
       <div class="grid-container">

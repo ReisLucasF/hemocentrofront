@@ -1,6 +1,7 @@
 
 <?php
     require_once '../auth.php';
+    
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@
 <body>
 
     <?php
-        include './partials/header.php';
+        include '../partials/header.php';
     ?>
 
 <div class="container">
@@ -114,7 +115,7 @@
 
             function obterBancoDeSangue() {
                 if (!hemocentroId) return;
-                fetch(`https://hemocentro-pi.vercel.app/banco/${hemocentroId}`)
+                fetch(`https://hemocentro-pi.vercel.app/banco/4`)
                     .then(response => response.json())
                     .then(data => {
                         $('#valorIdeal').val(data.valorIdeal || '');
