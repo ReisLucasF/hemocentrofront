@@ -1,0 +1,29 @@
+body {
+    background: linear-gradient(135deg, #7e0b2b, #dd4a48, #121212);
+    background-size: 220% 220%;
+    animation: gradient 15s ease infinite;
+    /* min-height: 100vh; */
+    overflow-x: hidden;
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+.sobre{
+    color: #000000;
+    text-align: center;
+    border-radius: 20px;
+    padding: 1em;
+    margin: 2 20%;
+    background-color: #ffffff;
+}
+
+.logo{
+    margin-top: -10%;
+    text-align: center;
+}
+
+.title{
+    color: #ffff;
+    text-align: center;
+}
+

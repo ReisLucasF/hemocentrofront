@@ -15,41 +15,43 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="<?php echo $domain; ?>/img/favicon.png" type="image/x-icon">
   </head>
+  
   <body>
     <?php
       include './partials/header.php';
     ?>
-      <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title text-center">Login</h5>
-          </div>
-          <div class="card-body">
-            <form id="loginForm">
-              <div class="form-group">
-                <label for="tipoUsuario">Tipo de Usuário:</label>
-                <select id="tipoUsuario" name="tipoUsuario" class="form-control">
-                  <option value="doador">Doador</option>
-                  <option value="hemocentro">Hemocentro</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="cpf">CPF:</label>
-                <input type="number" id="cpf" name="cpf" class="form-control" oninput="limitarComprimento(this, 11)" placeholder="Digite seu cpf" required>
-              </div>
-              <div class="form-group">
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua senha" required>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-            </form>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title text-center">Login</h5>
+            </div>
+            <div class="card-body">
+              <form id="loginForm">
+                <div class="form-group">
+                  <label for="tipoUsuario">Tipo de Usuário:</label>
+                  <select id="tipoUsuario" name="tipoUsuario" class="form-control">
+                    <option value="doador">Doador</option>
+                    <option value="hemocentro">Hemocentro</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="cpf">CPF:</label>
+                  <input type="number" id="cpf" name="cpf" class="form-control" oninput="limitarComprimento(this, 11)" placeholder="Digite seu cpf" required>
+                </div>
+                <div class="form-group">
+                  <label for="senha">Senha:</label>
+                  <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                <a href="./criar-conta.php">Criar conta</a>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 <script>
   function limitarComprimento(input, maxLength) {
