@@ -44,5 +44,9 @@ include './partials/header.php';
     <!-- <div class="logo"> 
     <img src="img/devos.png" alt="Devos Alliance">
     </div> -->
+
+    <?php
+        include './partials/footer.php';
+    ?>
   </body>
 </html>
