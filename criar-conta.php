@@ -90,3 +90,66 @@ include './partials/header.php';
         include './partials/footer.php';
     ?>
 </body>
+<!-- https://hemocentro-pi.vercel.app -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('CadastroForm');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const nome = document.getElementById('nome').value;
+    const dataNascimento = document.querySelector('.data').value;
+    const cpf = document.querySelector('input[name="cpf"]').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+    const confirmSenha = document.getElementById('confirmSenha').value;
+    const concordaTermos = document.querySelector('input[type="checkbox"]').checked;
+
+    // Verifica se as senhas coincidem
+    if (senha !== confirmSenha) {
+      alert('As senhas não coincidem.');
+      return;
+    }
+
+    // Verifica se os termos foram aceitos
+    if (!concordaTermos) {
+      alert('É necessário aceitar os termos e condições.');
+      return;
+    }
+
+    const requestBody = {
+      nome,
+      dataNascimento,
+      cpf,
+      email,
+      senha,
+      tipoUsuario: 'doador' // Definindo explicitamente como doador
+    };
+
+    try {
+      const response = await fetch('https://hemocentro-pi.vercel.app/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Usuário cadastrado com sucesso! ID: ' + data.id);
+        window.location.href = '<?php echo $domain; ?>/login.php';
+      } else {
+        throw new Error(data.error || 'Erro ao cadastrar usuário');
+      }
+    } catch (error) {
+      console.error('Erro ao cadastrar usuário:', error.message);
+      alert('Erro ao cadastrar usuário. Tente novamente mais tarde.');
+    }
+  });
+});
+
+</script>
