@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row segundaColuna">
       <div class="col">
         <h2>Indicadores</h2>
         <p>Nossos indicadores sanguíneos.</p>
@@ -146,35 +146,36 @@
         <a href="<?php echo $domain; ?>/doador/criar_agendamento.php"><img  class="agenda" src="./img/calendario.png" alt=""></a>
       </div>
     </div>
+    <?php
+        include './partials/footer.php';
+    ?>
   </div>
   
-  <script src="blood.js"></script>
+    <script src="blood.js"></script>
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
- <script>
-      $(document).ready(function(){
-          $(".owl-carousel").owlCarousel({
-              items: 1,
-              loop: true,
-              margin: 10,
-              nav: true,
-              dots: true,
-              navText: [
-                  '<i class="fas fa-chevron-left"></i>',
-                  '<i class="fas fa-chevron-right"></i>'
-              ]
-          });
-      });
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                navText: [
+                    '<i class="fas fa-chevron-left"></i>',
+                    '<i class="fas fa-chevron-right"></i>'
+                ]
+            });
+        });
+    </script>
 
   
-<!-- Bootstrap JS e jQuery -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS e jQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   
-<?php
-    include './partials/footer.php';
-?>
+
 </body>
 </html>

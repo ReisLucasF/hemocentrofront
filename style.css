@@ -3,6 +3,9 @@ h4, p{
     color: #ffffff;
 }
 
+
+
+
 html,
 body {
     background: linear-gradient(135deg, #7e0b2b, #dd4a48, #121212);
@@ -13,6 +16,14 @@ body {
     margin: 0;
     min-width: 100vw;
     min-height: 100vh;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
 }
 
 .login{
@@ -88,6 +99,10 @@ section-2 {
 
  container-estoque h4{
     color: #121212;
+ }
+
+ .segundaColuna{
+    margin-bottom: 100px;
  }
 
 .col>h4,
